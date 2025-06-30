@@ -190,4 +190,4 @@ def show_progress(cat, pg, _):
     print(f"{cat} → gverdi {pg}")
 
 if __name__ == "__main__":
-    scrape_category("B", progress_fn=show_progress)
+    scrape_category("AM", progress_fn=show_progress)
