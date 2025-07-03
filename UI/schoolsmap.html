@@ -100,7 +100,7 @@
       flex-grow: 1;
       color: #fff;
       background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
-      padding-bottom: 7rem;
+      padding-bottom: 3rem;
     }
 
     main {
@@ -112,22 +112,44 @@
       padding: 1.5rem;
     }
   </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 </head>
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=6865456e&is=6863f3ee&hm=9736e8f28eb40f1bcee9f15f4e980eb5f65f48f1fd76dff5fc115c99cea02359" alt="icon">
-      <a href="home.html" class="button">Home</a>
-      <a href="practice.html" class="button">Practice</a>
-      <a href="stats.html" class="button">Stats</a>
-      <a href="schoolsmap.html" class="button" id="selected">Driving Schools</a>
+      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <a href="file:///home.html" class="button">Home</a>
+      <a href="file:///practice.html" class="button">Practice</a>
+      <a href="file:///stats.html" class="button">Stats</a>
+      <a href="file:///schoolsmap.html" class="button" id="selected">Driving Schools</a>
     </div>
   </div>
 
   <div id="main-content">
     <main>
-        <h1>map</h1>
+        <div id="map" style="height: 100%; width: 100%;"></div>
     </main>
   </div>
+
+<script>
+    const map = L.map('map').setView([41.7151, 44.8271], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const schools = {{school_data}};
+
+    schools.forEach(school => {
+      const marker = L.marker([school.lat, school.lon]).addTo(map);
+      let content = `<b>${school.name}</b><br>${school.address}<br>${school.phone}`;
+      if (school.website) {
+        content += `<br><a href="${school.website}" target="_blank">Website</a>`;
+      }
+      marker.bindPopup(content);
+    });
+  </script>
 </body>
 </html>
