@@ -214,7 +214,6 @@
   </div>
 
   <div id="main-content">
-    <a href="pycall:toggle_test_state">Toggle</a>
     <main>
       <div class="row">
         <div class="card">
@@ -232,33 +231,31 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="pycall:update">
             <h2>
-              Category
+              Update Category
             </h2>
             <p>
-              Choose a specific category and theme
+              Keep the tests up to date
             </p>
+            <!-- <p>
+              {{progress}}
+            </p> -->
             <img src="https://cdn.discordapp.com/attachments/883277359669735514/1389916431893794947/Untitled.png?ex=68665c0c&is=68650a8c&hm=241ec5b9cf2c5f8ad74148f9f8a28ace8cb152afd377f05fdbd6af2f24959bc0&" alt="start">
           </a>
         </div>
       </div>
       <div class="row">
-        <div class="card" id="enabledcontinue" style="display: {{enabled_style}};">
-          <a class="cardlink" href="pycall:testtype_continue">
-            <h2>Continue</h2>
-            <p>Test in progress: {{in_progress}}</p>
+        <div class="card">
+          <a class="cardlink" href="">
+            <h2>Entire Category</h2>
+            <p>Test with every question in the category</p>
             <img src="https://cdn.discordapp.com/attachments/883277359669735514/1389916431893794947/Untitled.png?ex=68665c0c&is=68650a8c&hm=241ec5b9cf2c5f8ad74148f9f8a28ace8cb152afd377f05fdbd6af2f24959bc0&" alt="start">
           </a>
         </div>
         
-        <div class="card" id="disabledcontinue" style="display: {{disabled_style}};">
-          <h2>Continue</h2>
-          <p>Test in progress: {{in_progress}}</p>
-        </div>
-        
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///info.html">
             <h2>
               Info
             </h2>

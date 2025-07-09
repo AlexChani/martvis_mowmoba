@@ -146,7 +146,8 @@
       const marker = L.marker([school.lat, school.lon]).addTo(map);
       let content = `<b>${school.name}</b><br>${school.address}<br>${school.phone}`;
       if (school.website) {
-        content += `<br><a href="${school.website}" target="_blank">Website</a>`;
+        // content += `<br><a href="${school.website}" target="_blank">Website</a>`;
+        content += `<br>Website: ${school.website}`;
       }
       marker.bindPopup(content);
     });

@@ -120,6 +120,7 @@ def scrape_category(cat_name, progress_fn=None):
                 progress_fn(f"{cat_name}/T{theme_id}", page, None)
 
             print(f"[{cat_name}] scraping theme {theme_id} -> page {page}...")
+
             res = requests.get(f"{BASE_URL.format(cat_id, theme_id)}?page={page}")
             soup = BeautifulSoup(res.text, "html.parser")
             items = soup.select(".item")
@@ -182,12 +183,9 @@ def scrape_category(cat_name, progress_fn=None):
     con.commit()
     con.close()
     elapsed = time.time() - start_time
+    if progress_fn:
+        progress_fn(f"{cat_name}/T{theme_id}", page, None)
     print(f"finished category: {cat_name} in {elapsed:.2f} seconds")
 
-
-# magaliti
-def show_progress(cat, pg, _):
-    print(f"{cat} → gverdi {pg}")
-
-if __name__ == "__main__":
-    scrape_category("AM", progress_fn=show_progress)
+#if __name__ == "__main__":
+#    scrape_category("AM", progress_fn=show_progress)

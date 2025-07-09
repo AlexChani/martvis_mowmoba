@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEnginePage
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QIcon
+import infoManager
 
 # paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -33,10 +34,19 @@ class MainWindow(QMainWindow):
         self.view.setPage(CustomWebEnginePage(self.view, self.handle_pycall))
         self.setCentralWidget(self.view)
 
+        self.progresstext = ""
+
         self.view.urlChanged.connect(self.handle_url)
-        self.load_page("home.html")
+        if(infoManager.info_exists()):
+            self.load_page("home.html")
+        else:
+            self.load_page("index.html")
 
         self.test_in_progress = True
+
+    def show_progress(self, cat, pg, _):
+        self.progresstext = f"{cat} → gverdi {pg}"
+        self.load_page("practice.html")
 
     def load_page(self, page_name):
         page_path = os.path.join(PAGES_DIR, page_name)
@@ -49,11 +59,12 @@ class MainWindow(QMainWindow):
 
         # html = html.replace("{{username}}", get_username())
 
-        if page_name == "practice.html":
-            html = html.replace("{{enabled_style}}", "flex" if self.test_in_progress else "none")
-            html = html.replace("{{disabled_style}}", "none" if self.test_in_progress else "flex")
-            html = html.replace("{{in_progress}}", "Yes" if self.test_in_progress else "No")
-        elif page_name == "schoolsmap.html":
+        #if page_name == "practice.html":
+           # html = html.replace("{{enabled_style}}", "flex" if self.test_in_progress else "none")
+           # html = html.replace("{{disabled_style}}", "none" if self.test_in_progress else "flex")
+           # html = html.replace("{{in_progress}}", "Yes" if self.test_in_progress else "No")
+           # html = html.replace("{{progress}}", self.progresstext)
+        if page_name == "schoolsmap.html":
             import json
             schools = [
                 {"name": "Emsi Driving School", "lat": 41.722626582787434, "lon": 44.73030587850845,
@@ -90,6 +101,11 @@ class MainWindow(QMainWindow):
                  "phone": "591 25 10 10", "address": "130 M.Varshanidze, Batumi, Kutaisi 4600", "website": ""},
             ]
             html = html.replace("{{school_data}}", json.dumps(schools))
+        elif page_name == "home.html":
+            name = infoManager.getName()
+            html = html.replace("{{username}}", name)
+            html = html.replace("{{last_session}}", infoManager.save_and_compare_date() + " days ago")
+
         self.view.setHtml(html, QUrl.fromLocalFile(page_path))
 
     def handle_url(self, url):
@@ -103,30 +119,38 @@ class MainWindow(QMainWindow):
             self.load_page(filename)
 
     def handle_pycall(self, url):
+        from urllib.parse import urlparse, parse_qs
         print("CALLED PYTHON:", url.toString())
         action = url.path().lstrip("/")
-        if action == "close":
-            self.close()
-        elif action == "minimize":
-            self.showMinimized()
-        elif action == "maximize":
-            self.showMaximized() if not self.isMaximized() else self.showNormal()
-        elif action == "toggle_test_state":
-            self.test_in_progress = not self.test_in_progress
-            self.load_page("practice.html")
+        query = parse_qs(url.query())
+
+        if action == "submit_name":
+            name = query.get("name", [""])[0]
+            category = query.get("category", [""])[0]
+
+            infoManager.signin(name, category)
+
+            self.load_page("home.html")
+        #elif action == "toggle_test_state":
+            #self.test_in_progress = not self.test_in_progress
+            #self.load_page("practice.html")
         elif action.startswith("testtype_"):
             test_type = action.replace("testtype_", "")
             self.start_test(test_type)
             self.load_page("quiz.html")
+        elif action.startswith("update"):
+            import scraper
+            scraper.scrape_category(infoManager.getCategory(), self.show_progress)
 
-    def toggle_test_state(self):
-        self.test_in_progress = not self.test_in_progress
-        self.load_page("practice.html")
+
+#    def toggle_test_state(self):
+#        self.test_in_progress = not self.test_in_progress
+#        self.load_page("practice.html")
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    MainWindowInstance = MainWindow()
     app.setWindowIcon(QIcon(ICON_PATH))
-    window = MainWindow()
-    window.show()
+    MainWindowInstance.show()
     sys.exit(app.exec_())
