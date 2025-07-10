@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Drivers License App")
         self.setWindowIcon(QIcon(ICON_PATH))  # ✅ Taskbar icon
-        self.setMinimumSize(1400, 1050)
+        self.setMinimumSize(1500, 1050)
 
         self.view = QWebEngineView()
         self.view.setPage(CustomWebEnginePage(self.view, self.handle_pycall))
@@ -104,7 +104,10 @@ class MainWindow(QMainWindow):
         elif page_name == "home.html":
             name = infoManager.getName()
             html = html.replace("{{username}}", name)
-            html = html.replace("{{last_session}}", infoManager.save_and_compare_date() + " days ago")
+            if infoManager.save_and_compare_date() != 0:
+                html = html.replace("{{last_session}}", str(infoManager.save_and_compare_date()) + " days ago")
+            else:
+                html = html.replace("{{last_session}}", "No previous session")
 
         self.view.setHtml(html, QUrl.fromLocalFile(page_path))
 

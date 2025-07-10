@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+    
+    #sidebar {
+      width: 16%;
+      min-width: 225px;
+      max-width: 24%;
+      background-color: #1f1f1f;
+      display: flex;
+      flex-direction: column;
+      border-right: rgba(255, 255, 255, 0.644) 1px solid;
+    }
+
+    #top {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    #icon {
+      padding-top: 0.45rem;
+      padding-left: 0.9rem;
+      max-width: 30%;
+      height: auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 20%;
+    }
+
+    .button {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 1rem 1.7rem;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: 100%;
+      min-height: 50px;
+      text-align: left;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    #exitimg {
+      max-width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    #selected {
+      color: white;
+    }
+
+    #main-content {
+      flex-grow: 1;
+      color: #fff;
+      background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      padding-bottom: 7rem;
+    }
+
+    main {
+      display: flex;
+      height: fit-content;
+      overflow-y: auto;
+      padding: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .card {
+      margin: 5px;
+      background-color: #292929;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      overflow: clip;
+      padding: 10px;
+      width: 350px;
+      height: fit-content;
+      min-width: 200px;
+      min-height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .card img {
+      width: 350px;
+      height: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .card p, .card h2 {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: default;
+    }
+
+    h2{
+      pointer-events: none;
+      z-index: 1;
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+
+    .bbutton {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 15px;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: fit-content;
+      min-height: 50px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .bbutton:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="top">
+      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <a href="file:///home.html" class="button">Home</a>
+      <a href="file:///practice.html" class="button">Practice</a>
+      <a href="file:///stats.html" class="button">Stats</a>
+      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <a href="file:///roadsigns.html" class="bbutton">Back</a>
+    <main>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.1.svg" alt="image">
+        <h2>Entry is prohibited</h2>
+        <p>Prohibits entry by all types of vehicles in the given direction. The sign does not apply to minibuses.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.2.svg" alt="image">
+        <h2>Movement is prohibited</h2>
+        <p>Prohibits movement by all types of vehicles. The sign indicates that movement in both directions is prohibited. The sign does not apply to a minibus. The sign does not apply to a vehicle that serves an enterprise located in the specified zone, or serves or belongs to a person living or working in the same zone. In this case, the vehicle enters the specified zone and exits it at the nearest intersection to its destination. The sign does not apply to a vehicle driven by a person with a significantly or severely disabled status, or to a vehicle that transports the said persons.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.3.svg" alt="image">
+        <h2>Movement by mechanical means is prohibited</h2>
+        <p>Prohibits movement by all types of mechanical vehicles. The sign indicates that movement in both directions is prohibited. The sign does not apply to a minibus. The sign does not apply to a vehicle that serves an enterprise located in the specified zone, or serves or belongs to a person living or working in the same zone. In this case, the vehicle enters the specified zone and exits it at the nearest intersection to its destination. The sign does not apply to a vehicle driven by a person with a significantly or severely disabled status, or to a vehicle that transports the said persons.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.4.svg" alt="image">
+        <h2>Truck traffic is prohibited</h2>
+        <p>Prohibits movement by vehicles and combinations of vehicles whose maximum permissible mass exceeds the maximum permissible mass limit indicated on the sign. The sign indicates that movement is prohibited in both directions. The sign does not apply to vehicles that serve an enterprise located in the specified zone, or serve or belong to a person living or working in the same zone. In this case, the vehicle enters the specified zone and exits from there to its destination at the nearest intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.5.svg" alt="image">
+        <h2>Driving a motorcycle is prohibited</h2>
+        <p>Prohibits all types of motorcycle traffic. The sign indicates that traffic is prohibited in both directions. The sign does not apply to vehicles that serve an enterprise located in the specified zone, or that serve or belong to a person living or working in the same zone. In this case, the vehicle enters the specified zone and exits it at the nearest intersection to its destination.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.6.svg" alt="image">
+        <h2>Driving a tractor is prohibited</h2>
+        <p>Prohibits movement by all types of tractors and specialized self-propelled vehicles. The sign indicates that movement is prohibited in both directions. The sign does not apply to vehicles that serve an enterprise located in the specified zone, or serve or belong to a person living or working in the same zone. In this case, the vehicle enters the specified zone and exits from there to its destination at the nearest intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.7.svg" alt="image">
+        <h2>Driving with a trailer is prohibited</h2>
+        <p>Prohibits the movement of all types of trucks with trailers and tractors with trailers, as well as the towing of mechanical vehicles. The sign indicates that movement is prohibited in both directions. The sign does not apply to vehicles that serve an enterprise located in the specified zone, or serve or belong to a person living or working in the same zone. In this case, the vehicle enters the specified zone and exits from there to its destination at the nearest intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.8.svg" alt="image">
+        <h2>Movement by private transport is prohibited</h2>
+        <p>Prohibits the movement of motor vehicles, draft animals and riding animals, as well as the crossing of livestock. The sign indicates that movement is prohibited in both directions. The sign does not apply to vehicles that serve an enterprise located in the specified zone, or serve or belong to a person living or working in the same zone. In this case, the vehicle enters the specified zone and exits from there to its destination at the nearest intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.9.svg" alt="image">
+        <h2>Cycling is prohibited</h2>
+        <p>Prohibits the movement of bicycles and mopeds. The sign indicates that movement is prohibited in both directions.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.10.svg" alt="image">
+        <h2>Pedestrian movement is prohibited</h2>
+        <p>Prohibits pedestrian movement. The sign is placed in a place where pedestrian movement is prohibited, for their safety. The sign is valid only on the side of the road on which it is placed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.11.svg" alt="image">
+        <h2>Mass limitation</h2>
+        <p>Prohibits movement of vehicles and combinations of vehicles whose total actual mass exceeds that indicated on the sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.12.svg" alt="image">
+        <h2>Axle load limitation</h2>
+        <p>Prohibits movement by vehicles whose actual load on any axle exceeds that indicated on the sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.13.svg" alt="image">
+        <h2>Height restriction</h2>
+        <p>Prohibits movement by vehicles whose overall height (loaded or unloaded) exceeds that indicated on the sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.14.svg" alt="image">
+        <h2>Width restriction</h2>
+        <p>Prohibits movement by vehicles whose overall width (loaded or unloaded) exceeds that indicated on the sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.15.svg" alt="image">
+        <h2>Length limitation</h2>
+        <p>Prohibits movement of vehicles and combinations of vehicles whose overall length (loaded or unloaded) exceeds that indicated on the sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.16.svg" alt="image">
+        <h2>Minimum distance restriction</h2>
+        <p>Prohibits movement of vehicles at a distance less than that indicated on the sign. The effect of the sign extends after the appropriate sign, from the place of installation of the sign to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The effect of the sign also extends to the exit from the adjacent territory, to the intersection (junction) of field, forest and other secondary roads, before which there is no appropriate sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.17.1.svg" alt="image">
+        <h2>Customs checkpoint</h2>
+        <p>It prohibits passing through a customs checkpoint (a customs control zone located at the Georgian customs border) without stopping.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.17.2.svg" alt="image">
+        <h2>Danger</h2>
+        <p>Prohibits further movement by all types of vehicles due to a traffic accident or other danger.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.17.3.svg" alt="image">
+        <h2>Control</h2>
+        <p>It prohibits passing through a checkpoint (police or quarantine checkpoint, entrance to a border or closed zone, exit to a toll road, etc.) without stopping.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.18.1.svg" alt="image">
+        <h2>Right turn prohibited</h2>
+        <p>Prohibits turning right at the nearest intersection. The sign does not apply to minibuses. The sign applies to the intersection in front of which the sign is installed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.18.2.svg" alt="image">
+        <h2>Left turns are prohibited</h2>
+        <p>Prohibits turning left at the nearest intersection. The sign does not apply to minibuses. The sign applies to the intersection in front of which the sign is installed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.19.svg" alt="image">
+        <h2>Turning is prohibited</h2>
+        <p>Turning at the nearest intersection. The sign does not apply to minibuses.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.20.svg" alt="image">
+        <h2>Overtaking is prohibited</h2>
+        <p>Prohibits overtaking of all types of mechanical vehicles (except for vehicles moving at a speed of less than 30 km/h). Overtaking of motorcycles, mopeds and bicycles without crossing into the oncoming traffic lane is permitted. The effect of the sign extends after the appropriate sign, from the place of installation of the sign to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The effect of the sign also extends to the exit from the adjacent territory, to the intersection (junction) of field, forest and other secondary roads, before which there is no appropriate sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.21.svg" alt="image">
+        <h2>End of overtaking ban</h2>
+        <p>End of the zone of operation of the 3.20 road sign (overtaking prohibited)</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.22.svg" alt="image">
+        <h2>Overtaking by a truck is prohibited</h2>
+        <p>It prohibits overtaking another vehicle with a truck with a maximum permissible mass of more than 3.5 tons (except for vehicles moving at a speed of less than 30 km/h), as well as overtaking another vehicle with a tractor (except for pedestrian transport and bicycles). The sign is valid after the appropriate sign, from the place of installation of the sign to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The sign is also valid at the exit from the adjacent territory, at the intersection (junction) of field, forest and other secondary roads, before which there is no appropriate sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.23.svg" alt="image">
+        <h2>End of the ban on overtaking by trucks</h2>
+        <p>End of the zone of operation of the road sign 3.22 (Overtaking by trucks prohibited).</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.24.svg" alt="image">
+        <h2>Maximum speed limit</h2>
+        <p>Prohibits movement at a speed exceeding the speed indicated on the sign (km/h). The effect of the sign extends after the appropriate sign, from the place of installation of the sign to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The effect of the sign also extends to the exit from the adjacent territory, to the intersection (junction) of field, forest and other secondary roads, in front of which there is no appropriate sign. The effect of the 3.24 sign installed in front of the settlement indicated by signs 5.23.1 and 5.23.2 extends to signs 5.23.1 and 5.23.2 indicating the settlement, respectively.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.25.svg" alt="image">
+        <h2>End of maximum speed limit</h2>
+        <p>End of the zone of operation of sign 3.24 (maximum speed limit).</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.26.svg" alt="image">
+        <h2>Giving a sound signal is prohibited</h2>
+        <p>Prohibits the use of sound signals, except when the signal is used to prevent a traffic accident. The effect of the sign extends after the appropriate sign, from the place of installation of the sign to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The effect of the sign also extends to the exit from the adjacent territory, to the intersection (junction) of field, forest and other secondary roads, before which there is no appropriate sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.27.svg" alt="image">
+        <h2>Stopping is prohibited</h2>
+        <p>Prohibits both stopping and standing of vehicles. The sign does not apply to minibuses. The sign applies after the appropriate sign, from the place of installation of the sign to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The sign also applies at the exit from the adjacent territory, at the intersection (junction) of field, forest and other secondary roads, in front of which there is no appropriate sign. The sign applies only to the side of the road on which it is installed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.28.svg" alt="image">
+        <h2>Standing is prohibited</h2>
+        <p>Prohibits parking of vehicles. The sign does not apply to a postal vehicle with a white diagonal stripe on a blue background, as well as to a taxi with a taximeter turned on. The sign does not apply to a vehicle driven by a person with a significantly or clearly expressed disability, or to a vehicle transporting such persons. The sign applies after the appropriate sign, from the place where the sign is installed to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The sign also applies at the exit from the adjacent territory, at the intersection (junction) of field, forest and other secondary roads, before which there is no appropriate sign. The sign applies only to the side of the road on which it is installed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.29.svg" alt="image">
+        <h2>Standing is prohibited on odd numbers</h2>
+        <p>Prohibits parking of vehicles on odd numbers of the month. When signs 3.29 and 3.30 are used simultaneously, the time for moving a vehicle from one side of the road to the other is from 7 pm to 9 pm. During this period, parking is permitted on both sides of the carriageway. The sign does not apply to a postal vehicle with a white diagonal stripe on a blue background on its body, as well as to a taxi with a taximeter turned on. The sign does not apply to a vehicle driven by a person with a significantly pronounced or pronounced disability status, or to a vehicle transporting said persons. The sign applies after the appropriate sign, from the place of installation of the sign to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The sign also applies at the exit from the adjacent territory, at the intersection (junction) of field, forest and other secondary roads, before which there is no appropriate sign. The sign is valid only on the side of the road on which it is placed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.30.svg" alt="image">
+        <h2>Standing is prohibited on even numbers</h2>
+        <p>Prohibits parking of vehicles on even numbers of the month. When signs 3.29 and 3.30 are used simultaneously, the time for moving a vehicle from one side of the road to the other is from 7:00 pm to 9:00 pm During this period, parking is permitted on both sides of the carriageway. The sign does not apply to a postal vehicle with a white diagonal stripe on a blue background on its body, as well as to a taxi with a taximeter turned on. The sign does not apply to a vehicle driven by a person with a significantly pronounced or pronounced disability, or to a vehicle transporting such persons. The sign applies after the appropriate sign, from the place where the sign is installed to the nearest intersection, and in the absence of an intersection in a settlement - to the end of the settlement. The sign also applies at the exit from the adjacent territory, at the intersection (junction) of field, forest and other secondary roads, before which there is no appropriate sign. The sign is valid only on the side of the road on which it is placed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.31.svg" alt="image">
+        <h2>End of all restrictions</h2>
+        <p>End of the zone of operation of several signs simultaneously.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.32.svg" alt="image">
+        <h2>Movement by means of vehicles carrying dangerous goods is prohibited</h2>
+        <p>Prohibits movement by vehicles carrying dangerous goods, which, according to the legislation of Georgia, must be marked with an appropriate identification sign. The sign indicates that movement is prohibited in both directions.
+The sign is erected to prevent deviation from the route intended for vehicles carrying dangerous, explosive and flammable goods, as well as to prohibit the entry of the specified vehicles into a road or area where they pose a particular danger to people.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/3/3.33.svg" alt="image">
+        <h2>Movement by means of vehicles carrying explosive and flammable cargo is prohibited</h2>
+        <p>Prohibits movement by vehicles carrying explosive and flammable cargo of classes 1.22–2.4, 3.1, 3.2, 5.2, defined by the State Standard 19433-88, which, according to the legislation of Georgia, must be marked with a dangerous cargo identification sign. The sign indicates that movement in both directions is prohibited.
+The sign is installed to prevent deviation from the route intended for vehicles carrying dangerous, explosive and flammable cargo, as well as to prohibit the entry of the specified vehicles into a road or area where they pose a particular danger to people.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

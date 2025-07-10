@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+    
+    #sidebar {
+      width: 16%;
+      min-width: 225px;
+      max-width: 24%;
+      background-color: #1f1f1f;
+      display: flex;
+      flex-direction: column;
+      border-right: rgba(255, 255, 255, 0.644) 1px solid;
+    }
+
+    #top {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    #icon {
+      padding-top: 0.45rem;
+      padding-left: 0.9rem;
+      max-width: 30%;
+      height: auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 20%;
+    }
+
+    .button {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 1rem 1.7rem;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: 100%;
+      min-height: 50px;
+      text-align: left;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    #exitimg {
+      max-width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    #selected {
+      color: white;
+    }
+
+    #main-content {
+      flex-grow: 1;
+      color: #fff;
+      background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      padding-bottom: 7rem;
+    }
+
+    main {
+      display: flex;
+      height: fit-content;
+      overflow-y: auto;
+      padding: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .card {
+      margin: 5px;
+      background-color: #292929;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      overflow: clip;
+      padding: 10px;
+      width: 350px;
+      height: fit-content;
+      min-width: 200px;
+      min-height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .card img {
+      width: 350px;
+      height: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .card p, .card h2 {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: default;
+    }
+
+    h2{
+      pointer-events: none;
+      z-index: 1;
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="top">
+      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <a href="file:///home.html" class="button">Home</a>
+      <a href="file:///practice.html" class="button">Practice</a>
+      <a href="file:///stats.html" class="button">Stats</a>
+      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <a href="file:///roadsigns.html" class="button">Back</a>
+    <main>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.1.svg" alt="sign image">
+        <h2>Railway crossing with barriers</h2>
+        <p>Gives a warning about approaching a railway crossing with a barrier. In an uninhabited area the sign is placed 150‑300 meters from the beginning of the dangerous section, in a populated area 50‑100 meters. The sign is repeated in an uninhabited area at least 50 meters from the beginning of the dangerous section.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.2.svg" alt="sign image">
+        <h2>Railway crossing without barriers</h2>
+        <p>Gives a warning about approaching a railway crossing without a level crossing. In an uninhabited area, the sign is placed 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters. The sign is repeated in an uninhabited area, at a distance of at least 50 meters from the beginning of the dangerous section.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.3.1.svg" alt="sign image">
+        <h2>Single-track railway</h2>
+        <p>Provides warning of approaching a single-track railway crossing. It is installed directly in front of the railway crossing.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.3.2.svg" alt="sign image">
+        <h2>Multi-track railway</h2>
+        <p>Provides warning of approaching a level crossing with two or more tracks. It is installed directly in front of the railway crossing.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.4.1.-1.4.6.svg" alt="sign image">
+        <h2>Approaching a railway crossing</h2>
+        <p>Additionally warns the driver about approaching a railway crossing in an uninhabited area. Signs 1.4.1−1.4.3 are installed on the right side of the road, and signs 1.4.4−1.4.6 are installed on the left side of the road. Signs 1.4.1 and 1.4.4 are installed in the direction of movement together with the main and repeated signs 1.1 or 1.2, signs 1.4.3 and 1.4.6 are installed in the direction of movement together with the repeated signs 1.1 or 1.2, and signs 1.4.2 and 1.4.5 are installed independently, at an equal distance between the main and repeated signs 1.1 or 1.2.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.5.svg" alt="sign image">
+        <h2>Tram line crossing</h2>
+        <p>Provides a warning about crossing a tram line with a road. In uninhabited areas, the sign is placed 150-300 meters from the beginning of the dangerous section, in populated areas - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.6.svg" alt="sign image">
+        <h2>Crossing of roads of equal importance</h2>
+        <p>At an intersection with roads of equal importance. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.7.1.svg" alt="sign image">
+        <h2>Intersection with a secondary road</h2>
+        <p>Crossing a road on which the driver is also obliged to give way. The sign is placed 150-300 meters before the beginning of the dangerous section in an uninhabited area, 50-100 meters in a populated area. The sign is placed 150-300 meters before the beginning of the dangerous section in an uninhabited area, 50-100 meters in a populated area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.7.2.-1.7.7.svg" alt="sign image">
+        <h2>Secondary road connection</h2>
+        <p>Joining a road on which the driver driving on it is also obliged to give way (joining from the right – 1.7.2, 1.7.4 and 1.7.6, joining from the left – 1.7.3, 1.7.5 and 1.7.7). The sign is placed 150–300 meters before the beginning of the dangerous section in an uninhabited area, 50–100 meters in a built-up area. The sign is placed 150–300 meters before the beginning of the dangerous section in an uninhabited area, 50–100 meters in a built-up area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.8.svg" alt="sign image">
+        <h2>Roundabout crossing</h2>
+        <p>Gives a warning about approaching a roundabout marked with sign 4.3. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.9.svg" alt="sign image">
+        <h2>Traffic light regulation</h2>
+        <p>An intersection, pedestrian crossing, or section of road (except for a railway crossing) on ​​which traffic is regulated by a traffic light. The sign is placed 150–300 meters from the beginning of the dangerous section in uninhabited areas, and 50–100 meters from the beginning of the dangerous section in populated areas.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.10.svg" alt="sign image">
+        <h2>Retractable bridge</h2>
+        <p>Gives a warning about approaching a bridge or ferry crossing that is about to open. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters. The sign is repeated in an uninhabited area, at a distance of at least 50 meters from the beginning of the dangerous section.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.11.svg" alt="sign image">
+        <h2>Beach access</h2>
+        <p>Exit to the coast or the shore of a reservoir. In an uninhabited area, the sign is placed 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters. The sign is repeated in an uninhabited area, at a distance of at least 50 meters from the beginning of the dangerous section.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.12.1.svg" alt="sign image">
+        <h2>Dangerous bend</h2>
+        <p>A dangerous right turn on a road with a small radius or limited visibility. The sign is placed 150-300 meters from the beginning of the dangerous section in an uninhabited area, and 50-100 meters from the beginning of the dangerous section in a populated area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.12.2.svg" alt="sign image">
+        <h2>Dangerous bend</h2>
+        <p>A dangerous left turn on a road with a small radius or limited visibility. The sign is placed 150-300 meters from the beginning of the dangerous section in an uninhabited area, and 50-100 meters from the beginning of the dangerous section in a populated area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.13.1.svg" alt="sign image">
+        <h2>Dangerous curves</h2>
+        <p>Road section with dangerous curves: first curve on the right. The sign is placed in an uninhabited area 150-300 meters before the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.13.2.svg" alt="sign image">
+        <h2>Dangerous curves</h2>
+        <p>Road section with dangerous curves: first curve on the left. The sign is placed in an uninhabited area 150-300 meters before the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.14.svg" alt="sign image">
+        <h2>Steep descent</h2>
+        <p>Gives a warning about approaching a steeply sloping road section. In uninhabited areas, the sign is placed 150-300 meters before the beginning of the dangerous section, in populated areas - 50-100 meters. If the ascent and descent (or descent and ascent) follow each other, signs 1.14 and 1.15 without the sign 8.1.1 may be placed, respectively, immediately before the ascent and descent;</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.15.svg" alt="sign image">
+        <h2>Steep climb</h2>
+        <p>Gives a warning about approaching a steep section of the road. In uninhabited areas, the sign is placed 150-300 meters before the beginning of the dangerous section, in populated areas - 50-100 meters. If the ascent and descent (or descent and ascent) follow each other, signs 1.14 and 1.15 without the sign 8.1.1 may be placed, respectively, immediately before the ascent and descent;</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.16.svg" alt="sign image">
+        <h2>Slippery Road</h2>
+        <p>A slippery section of the road where the tire-to-road adhesion coefficient is less than 0.4. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.17.svg" alt="sign image">
+        <h2>Uneven road</h2>
+        <p>A section of road, the carriageway of which is damaged by undulations, potholes, uneven junctions with bridges, etc. The sign is placed in an uninhabited area 150−300 meters from the beginning of the dangerous section, in a populated area - 50−100 meters away.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.18.svg" alt="sign image">
+        <h2>Artificial unevenness</h2>
+        <p>A section of road on which artificial unevenness is arranged to force a reduction in speed. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.19.svg" alt="sign image">
+        <h2>Stones</h2>
+        <p>A section of the road on which it is possible for stones, gravel, etc. to be thrown off the wheels of a vehicle. The sign is placed in an uninhabited area 150−300 meters from the beginning of the dangerous section, in a populated area - 50−100 meters away.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.20.svg" alt="sign image">
+        <h2>Dangerous roadside</h2>
+        <p>A section of the road where the condition of the roadside does not comply with existing standards. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.21.1.svg" alt="sign image">
+        <h2>Road narrowing</h2>
+        <p>A section of road where the width of the carriageway narrows on both sides. The sign is placed 150–300 meters from the beginning of the dangerous section in uninhabited areas, and 50–100 meters from the beginning of the dangerous section in populated areas.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.21.2.svg" alt="sign image">
+        <h2>Road narrowing</h2>
+        <p>A section of road where the width of the carriageway narrows from the right. The sign is placed in an uninhabited area 150−300 meters before the beginning of the dangerous section, in a populated area - 50−100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.21.3.svg" alt="sign image">
+        <h2>Road narrowing</h2>
+        <p>A section of the road where the width of the carriageway narrows 1.21.3 − from the left. The sign is placed in an uninhabited area 150−300 meters before the beginning of the dangerous section, in a populated area – at a distance of 50−100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.22.svg" alt="sign image">
+        <h2>Two-way traffic</h2>
+        <p>The beginning of a two-way section of a road (carriageway) preceded by a one-way section. In uninhabited areas, the sign is placed 150–300 meters from the beginning of the dangerous section, in populated areas – 50–100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.23.svg" alt="sign image">
+        <h2>Pedestrian crossing</h2>
+        <p>Gives a warning about approaching a pedestrian crossing marked with signs 5.19.1 and 5.19.2 and/or signs 1.14.1–1.14.3. The sign is placed in an uninhabited area at a distance of 150–300 meters from the beginning of the dangerous section, in a populated area – at a distance of 50–100 meters. The sign is repeated in an uninhabited area at a distance of at least 50 meters from the beginning of the dangerous section.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.24.svg" alt="sign image">
+        <h2>Children</h2>
+        <p>Provides a warning about the presence of a childcare facility near a road section, from which there is a high probability of children appearing on the roadway. The sign is placed in uninhabited areas 150-300 meters from the beginning of the dangerous section, in populated areas - 50-100 meters. The sign is repeated in populated and uninhabited areas, at a distance of at least 50 meters from the beginning of the dangerous section.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.25.svg" alt="sign image">
+        <h2>Crossing a bicycle path</h2>
+        <p>It warns of approaching the crossing point of the bicycle path marked with sign 4.4. In uninhabited areas, the sign is placed 150–300 meters before the beginning of the dangerous section, in populated areas – 50–100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.26.svg" alt="sign image">
+        <h2>Road works</h2>
+        <p>The section of the road within which the works are being carried out. The sign is placed in an uninhabited area at a distance of 150−300 meters from the beginning of the dangerous section, in a populated area - at a distance of 50−100 meters. The sign is repeated in populated and uninhabited areas, at a distance of at least 50 meters from the beginning of the dangerous section. When carrying out short-term work on the carriageway, the sign is placed at a distance of 10−15 meters from the place of work, without the 8.1.1 board.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.27.svg" alt="sign image">
+        <h2>Cattle call</h2>
+        <p>A section of the road that passes near a cattle (cattle) stall, farm, or/and a place where cattle (cattle) are constantly being moved, where they are likely to appear on the roadway. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.28.svg" alt="sign image">
+        <h2>Wild animals</h2>
+        <p>A section of a road passing by a reserve, hunting ground, forest, or other area where wild animals are expected to appear. In uninhabited areas, the sign is placed 150–300 meters from the beginning of the dangerous section, in populated areas – 50–100 meters away.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.29.svg" alt="sign image">
+        <h2>Stone fall</h2>
+        <p>A section of road, the carriageway of which is not protected from avalanches, landslides or rockfalls. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.30.svg" alt="sign image">
+        <h2>Crosswind</h2>
+        <p>A section of the road where strong crosswinds may occur. The sign is placed 150–300 meters from the beginning of the dangerous section in uninhabited areas, and 50–100 meters from the beginning of the dangerous section in populated areas.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.31.svg" alt="sign image">
+        <h2>Low-flying aircraft</h2>
+        <p>A section of road near an aerodrome where airplanes or helicopters fly at low altitude. In uninhabited areas, the sign is placed 150–300 meters from the beginning of the dangerous section, in populated areas – 50–100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.32.svg" alt="sign image">
+        <h2>Tunnel</h2>
+        <p>A tunnel in which there is no artificial lighting or the visibility of the entrance portal is less than 150 meters due to the terrain. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.33.svg" alt="sign image">
+        <h2>Temporarily blocked</h2>
+        <p>A section of road that is temporarily blocked. The sign is placed 150–300 meters from the beginning of the dangerous section in an uninhabited area, and 50–100 meters from the beginning of the dangerous section in a populated area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.34.svg" alt="sign image">
+        <h2>Other threats</h2>
+        <p>A section of the road on which a danger may arise that is not indicated by other warning signs. The sign is placed in an uninhabited area 150-300 meters from the beginning of the dangerous section, in a populated area - 50-100 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.35.1.-1.35.6.svg" alt="sign image">
+        <h2>Direction of turning</h2>
+        <p>Indicates the direction of movement on a small-radius road curve with limited visibility (1.35.1−1.35.3 − right, 1.35.4−1.35.6 − left) or the corresponding direction of bypassing a roadworks area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/1/1.36.1.-1.36.2.svg" alt="sign image">
+        <h2>Direction of turning</h2>
+        <p>Indicates the direction of traffic (right and left) at a "T" intersection or road junction, or the appropriate direction of bypassing a roadworks area.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

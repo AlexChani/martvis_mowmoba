@@ -15,7 +15,7 @@
     #sidebar {
       box-sizing: border-box;
       width: 16%;
-      min-width: 180px;
+      min-width: 225px;
       max-width: 24%;
       background-color: #1f1f1f;
       margin: 0;
@@ -103,8 +103,10 @@
       padding-bottom: 7rem;
     }
 
-        main {
-      display: grid;
+    main {
+      justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
       height: 100%;
       overflow-y: auto;
       padding: 1.5rem;
@@ -148,12 +150,6 @@
       box-shadow: none;
     }
 
-    .row {
-      display: flex;
-      width: 100%;
-      justify-content: space-around;
-    }
-
     .cardlink {
       overflow: clip;
       padding: 0;
@@ -195,6 +191,26 @@
       z-index: 1;
       text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     }
+
+    .bbutton {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 15px;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: fit-content;
+      min-height: 50px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .bbutton:hover {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
   </style>
 </head>
 <body>
@@ -209,8 +225,8 @@
   </div>
 
   <div id="main-content">
+    <a href="file:///info.html" class="bbutton">Back</a>
     <main>
-      <div class="row">
         <div class="card">
           <a class="cardlink" href="file:///warning.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-1.svg" alt="start">
@@ -220,7 +236,7 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///priority.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-2.svg" alt="start">
             <h2>
               Priority
@@ -228,7 +244,7 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///prohibitive.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-3.svg" alt="start">
             <h2>
               Prohibitive
@@ -236,17 +252,15 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///indicative.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-4.svg" alt="start">
             <h2>
               Indicative
             </h2>
           </a>
         </div>
-      </div>
-      <div class="row">
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///special.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-5.svg" alt="start">
             <h2>
               Special Instructions
@@ -254,7 +268,7 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///service.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-6.svg" alt="start">
             <h2>
               Service
@@ -262,7 +276,7 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///information.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-7.svg" alt="start">
             <h2>
               Information
@@ -270,7 +284,7 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///addinformation.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-8.svg" alt="start">
             <h2>
               Additional Information
@@ -278,14 +292,13 @@
           </a>
         </div>
         <div class="card">
-          <a class="cardlink" href="">
+          <a class="cardlink" href="file:///markings.html">
             <img src="https://teoria.on.ge/image/signs/sign-icon-101.svg" alt="start">
             <h2>
               Road markings
             </h2>
           </a>
         </div>
-      </div>
     </main>
   </div>
 </body>
