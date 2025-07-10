@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+    
+    #sidebar {
+      width: 16%;
+      min-width: 225px;
+      max-width: 24%;
+      background-color: #1f1f1f;
+      display: flex;
+      flex-direction: column;
+      border-right: rgba(255, 255, 255, 0.644) 1px solid;
+    }
+
+    #top {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    #icon {
+      padding-top: 0.45rem;
+      padding-left: 0.9rem;
+      max-width: 30%;
+      height: auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 20%;
+    }
+
+    .button {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 1rem 1.7rem;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: 100%;
+      min-height: 50px;
+      text-align: left;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    #exitimg {
+      max-width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    #selected {
+      color: white;
+    }
+
+    #main-content {
+      flex-grow: 1;
+      color: #fff;
+      background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      padding-bottom: 7rem;
+    }
+
+    main {
+      display: flex;
+      height: fit-content;
+      overflow-y: auto;
+      padding: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .card {
+      margin: 5px;
+      background-color: #292929;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      overflow: clip;
+      padding: 10px;
+      width: 350px;
+      height: fit-content;
+      min-width: 200px;
+      min-height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .card img {
+      width: 350px;
+      height: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .card p, .card h2 {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: default;
+    }
+
+    h2{
+      pointer-events: none;
+      z-index: 1;
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+
+    .bbutton {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 15px;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: fit-content;
+      min-height: 50px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .bbutton:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="top">
+      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <a href="file:///home.html" class="button">Home</a>
+      <a href="file:///practice.html" class="button">Practice</a>
+      <a href="file:///stats.html" class="button">Stats</a>
+      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <a href="file:///roadsigns.html" class="bbutton">Back</a>
+    <main>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.1.svg" alt="image">
+        <h2>General maximum speed restrictions</h2>
+        <p>Provides information about general speed limits established by the Road Traffic Regulations on Georgian roads. The sign is placed at the checkpoint at the entrance to the territory of Georgia.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.2.svg" alt="image">
+        <h2>Recommended speed</h2>
+        <p>Indicates the speed at which movement is recommended on a given section of the road. The sign is placed at the beginning of the road. The sign is valid until the nearest intersection, and together with a warning sign, it is valid for the entire length of the dangerous section.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.3.1.svg" alt="image">
+        <h2>Turning point</h2>
+        <p>Indicates the place of turning. The sign is placed in front of or above the turning place, or preceded by a sign 8.1.1. The sign does not allow left turns.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.3.2.svg" alt="image">
+        <h2>Turning zone</h2>
+        <p>Indicates the length of the turning zone. The sign is placed in front of or above the turning area, or preceded by a sign 8.1.1. The sign does not allow left turns.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.4.svg" alt="image">
+        <h2>Standing place</h2>
+        <p>A place intended for parking vehicles. The zone of validity of the sign is determined by road markings, and in its absence, the validity of the sign extends to the nearest intersection or is limited by the 8.2.1 sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.5.svg" alt="image">
+        <h2>Emergency stop lane</h2>
+        <p>Indicates the presence of an emergency stop lane on a steep downhill slope. The sign is placed in front of the entrance to the emergency stop lane.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.6.svg" alt="image">
+        <h2>Pedestrian underpass</h2>
+        <p>Pedestrian underpass. A sign is placed at all entrances and exits of the pedestrian underpass.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.7.svg" alt="image">
+        <h2>Pedestrian overpass</h2>
+        <p>Pedestrian overpass. A sign is placed at all entrances and exits of a pedestrian overpass.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.8.1.svg" alt="image">
+        <h2>Dead end</h2>
+        <p>A road that has no through exit. A sign is placed at the beginning of the road.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.8.2.svg" alt="image">
+        <h2>Dead end</h2>
+        <p>A road that has no through exit. A sign is placed before the intersection of a road that has no through exit.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.8.3.svg" alt="image">
+        <h2>Dead end</h2>
+        <p>A road that has no through exit. A sign is placed before the intersection of a road that has no through exit.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.9.3.svg" alt="image">
+        <h2>Traffic scheme</h2>
+        <p>Indicates the traffic pattern at an intersection when certain maneuvers are prohibited or the permitted directions of traffic at a complex intersection. The sign is placed directly in front of the intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.9.1.svg" alt="image">
+        <h2>Preliminary direction indicator</h2>
+        <p>Indicates the directions/directions of movement towards a settlement and other facility, as well as the directions/directions of bypassing a section of the road on which restrictions have been introduced. The signs also bear the image of sign 7.14.1, the symbols of a motorway, airport, sports and other pictograms. The signs also bear images of other signs that provide information on the features of movement. The distance from the place of installation of the sign to the intersection or to the beginning of the braking lane is indicated in the lower part of the sign. A green or blue background on this sign installed in an uninhabited area indicates that movement to the indicated settlement or other facility is carried out by motorway or other road, respectively. A green or blue background on this sign installed in a settlement indicates that movement to the specified settlement or other facility after leaving the given settlement is carried out by a motorway or other road, respectively, while a white background indicates that the specified facility is located in the given settlement.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.9.2.svg" alt="image">
+        <h2>Preliminary direction indicator</h2>
+        <p>Indicates the directions/directions of movement towards a settlement and other facility, as well as the directions/directions of bypassing the section of the road on which restrictions have been introduced. The signs shall also bear the image of sign 7.14.1, the symbols of a motorway, airport, sports and other pictograms. A green or blue background on this sign installed in an uninhabited area indicates that movement to the indicated settlement or other facility is carried out by a motorway or other road, respectively. A green or blue background on this sign installed in a populated area indicates that movement to the indicated settlement or other facility after leaving the given settlement is carried out by a motorway or other road, respectively, and a white background indicates that the specified facility is located in the given settlement.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.10.2.svg" alt="image">
+        <h2>Direction indicator</h2>
+        <p>Indicates the directions/direction of movement towards a settlement or other facility. The signs indicate the distance (in km) to the facility indicated on them, as well as symbols of a motorway, airport, sports and other pictograms. A green or blue background on this sign installed in an uninhabited area indicates that movement to the indicated settlement or other facility is carried out by a motorway or other road, respectively. A green or blue background on this sign installed in a populated area indicates that movement to the indicated settlement or other facility after leaving the given settlement is carried out by a motorway or other road, respectively, and a white background indicates that the specified facility is in the given populated area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.10.1.svg" alt="image">
+        <h2>Direction indicator</h2>
+        <p>Indicates the directions/direction of movement towards a settlement or other facility. The signs indicate the distance (in km) to the facility indicated on them, as well as symbols of a motorway, airport, sports and other pictograms. A green or blue background on this sign installed in an uninhabited area indicates that movement to the indicated settlement or other facility is carried out by a motorway or other road, respectively. A green or blue background on this sign installed in a populated area indicates that movement to the indicated settlement or other facility after leaving the given settlement is carried out by a motorway or other road, respectively, and a white background indicates that the specified facility is in the given populated area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.12.svg" alt="image">
+        <h2>Distance indicator</h2>
+        <p>Indicates the distance (km) to a settlement or other facility along the route.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.11.svg" alt="image">
+        <h2>Name of the object</h2>
+        <p>Indicates the name of an object other than a settlement – ​​street, river, lake, pass, landmark, etc. The sign is placed directly in front of the object.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.13.svg" alt="image">
+        <h2>Kilometer sign</h2>
+        <p>Indicates the distance (km) from the place where the sign is placed to the beginning or end of the road. The sign is placed after every 1 km.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.14.1.svg" alt="image">
+        <h2>Route number</h2>
+        <p>Indicates the number and direction of the road (route) approved in accordance with the established procedure.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.14.2.svg" alt="image">
+        <h2>Route number</h2>
+        <p>Indicates the number and direction of the road (route) approved in accordance with the established procedure.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.15.1.-7.15.3.svg" alt="image">
+        <h2>Direction of movement by truck</h2>
+        <p>Indicates the recommended direction of movement for trucks, tractors and self-propelled vehicles, if their movement in one of the directions at the intersection is prohibited. Signs are placed at the beginning of the recommended direction in front of the intersection or 100-150 meters before the intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.16.svg" alt="image">
+        <h2>სდექ line</h2>
+        <p>Indicates the place where a vehicle must stop at a regulated intersection and an unregulated railway crossing.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.18.1.-7.18.3.svg" alt="image">
+        <h2>Direction of circulation</h2>
+        <p>Indicates the direction of detour around a section of road temporarily closed to traffic. Signs are placed on the detour route before each intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.17.svg" alt="image">
+        <h2>Circulation scheme</h2>
+        <p>Indicates the bypass scheme for a section of road temporarily closed to traffic. In uninhabited areas, the sign is placed 150-300 meters from the intersection where the bypass route begins, and in populated areas, 50-100 meters away.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.19.1.svg" alt="image">
+        <h2>Preliminary indicator of movement to another carriageway</h2>
+        <p>Indicates the direction of bypassing a section of carriageway closed to traffic on a road with a dividing lane, or the direction of traffic to return to the right carriageway.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/7/7.19.2.svg" alt="image">
+        <h2>Preliminary indicator of movement to another carriageway</h2>
+        <p>Indicates the direction of bypassing a section of carriageway closed to traffic on a road with a dividing lane, or the direction of traffic to return to the right carriageway.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

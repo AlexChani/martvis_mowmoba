@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+    
+    #sidebar {
+      width: 16%;
+      min-width: 225px;
+      max-width: 24%;
+      background-color: #1f1f1f;
+      display: flex;
+      flex-direction: column;
+      border-right: rgba(255, 255, 255, 0.644) 1px solid;
+    }
+
+    #top {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    #icon {
+      padding-top: 0.45rem;
+      padding-left: 0.9rem;
+      max-width: 30%;
+      height: auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 20%;
+    }
+
+    .button {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 1rem 1.7rem;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: 100%;
+      min-height: 50px;
+      text-align: left;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    #exitimg {
+      max-width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    #selected {
+      color: white;
+    }
+
+    #main-content {
+      flex-grow: 1;
+      color: #fff;
+      background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      padding-bottom: 7rem;
+    }
+
+    main {
+      display: flex;
+      height: fit-content;
+      overflow-y: auto;
+      padding: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .card {
+      margin: 5px;
+      background-color: #292929;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      overflow: clip;
+      padding: 10px;
+      width: 350px;
+      height: fit-content;
+      min-width: 200px;
+      min-height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .card img {
+      width: 350px;
+      height: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .card p, .card h2 {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: default;
+    }
+
+    h2{
+      pointer-events: none;
+      z-index: 1;
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+
+    .bbutton {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 15px;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: fit-content;
+      min-height: 50px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .bbutton:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="top">
+      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <a href="file:///home.html" class="button">Home</a>
+      <a href="file:///practice.html" class="button">Practice</a>
+      <a href="file:///stats.html" class="button">Stats</a>
+      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <a href="file:///roadsigns.html" class="bbutton">Back</a>
+    <main>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.1.svg" alt="image">
+        <h2>Motorway</h2>
+        <p>A motorway on which the requirements of the motorway traffic regulations apply. The sign is placed at the beginning of the motorway or near it with the sign 8.1.1.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.2.svg" alt="image">
+        <h2>End of the motorway</h2>
+        <p>Indicates the end of the road marked with sign 5.1. Sign 5.2 is erected at the end of the motorway, at the exit from the motorway and at distances of 400 and 1000 meters before the end of the motorway with sign 8.1.1.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.3.svg" alt="image">
+        <h2>Road</h2>
+        <p>A road intended only for automobile and motorcycle traffic.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.4.svg" alt="image">
+        <h2>End of the road</h2>
+        <p>Indicates the end of the road marked with sign 5.3.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.5.svg" alt="image">
+        <h2>One-way road</h2>
+        <p>A road or carriageway on which vehicles travel in one direction over its entire width.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.6.svg" alt="image">
+        <h2>End of one-way road</h2>
+        <p>Indicates the end of a road or carriageway marked with sign 5.5.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.7.1.svg" alt="image">
+        <h2>Driving on a one-way road</h2>
+        <p>Indicates the exit onto a one-way road or carriageway. Signs shall be placed in front of all side entrances. Signs may not be placed at the intersection with the exit road from the adjacent territory if the territory can only be entered from the road marked with sign 5.5.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.7.2.svg" alt="image">
+        <h2>Driving on a one-way road</h2>
+        <p>Indicates the exit onto a one-way road or carriageway. Signs shall be placed in front of all side entrances. Signs may not be placed at the intersection with the exit road from the adjacent territory if the territory can only be entered from the road marked with sign 5.5.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.8.svg" alt="image">
+        <h2>Reverse movement</h2>
+        <p>The beginning of a section of road where the direction of traffic on one or more lanes can be reversed.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.9.svg" alt="image">
+        <h2>End of reverse movement</h2>
+        <p>Indicates the end of the road section marked with sign 5.8.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.10.svg" alt="image">
+        <h2>Driving on a road with reverse traffic</h2>
+        <p>Indicates the exit to the section of the road marked with sign 5.8. The sign is placed in front of all side exits. The sign may not be placed at the intersection with the exit road from the adjacent territory if the entry to this territory is possible only from the road marked with sign 5.8.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.11.svg" alt="image">
+        <h2>Road with a lane intended for minibuses</h2>
+        <p>A road on which a minibus vehicle travels in a specially designated lane in the opposite direction to the general flow of vehicles. The sign applies to the traffic lane on which it is located.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.12.svg" alt="image">
+        <h2>End of a road with a lane intended for minibuses</h2>
+        <p>Indicates the end of the road marked with sign 5.11.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.13.1.svg" alt="image">
+        <h2>Driving on a road with a lane intended for minibuses</h2>
+        <p>Indicates the exit to the road marked with sign 5.11. The sign is placed in front of all side entrances. Signs may not be placed at the intersection with the exit road from the adjacent territory if the entry to this territory is possible only from the road marked with sign 5.11.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.13.2.svg" alt="image">
+        <h2>Driving on a road with a lane intended for minibuses</h2>
+        <p>Indicates the exit to the road marked with sign 5.11. The sign is placed in front of all side entrances. Signs may not be placed at the intersection with the exit road from the adjacent territory if the entry to this territory is possible only from the road marked with sign 5.11.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.14.svg" alt="image">
+        <h2>Traffic lane intended for minibuses</h2>
+        <p>A road on which a minibus vehicle moves in a specially designated lane in the same direction as the general flow of vehicles. The effect of the sign extends to the traffic lane on which it is located. The effect of a sign installed on the right side of the road extends to the far right lane of the carriageway.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.1.svg" alt="image">
+        <h2>Directions of traffic on lanes</h2>
+        <p>Indicates the number of lanes and the permitted directions of movement on the lanes. Signs that allow turning from the extreme left lane also allow turning from the same lane. The effect of signs installed in front of an intersection applies to the entire intersection, unless other signs 5.15.1 and 5.15.2 installed on it indicate otherwise; the effect of signs does not apply to minibuses.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.2.svg" alt="image">
+        <h2>Directions of traffic on the lane</h2>
+        <p>Indicates the permitted directions of movement on a lane. Signs that allow turning from the far left lane also allow turning from the same lane. The effect of signs installed in front of an intersection applies to the entire intersection, unless other signs 5.15.1 and 5.15.2 installed on it indicate otherwise; the effect of signs does not apply to minibuses.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.3.svg" alt="image">
+        <h2>Beginning of the lane</h2>
+        <p>Indicates the beginning of a braking or additional lane at an uphill or branching and intersection. If sign 5.15.3 placed in front of an additional lane displays sign 4.6 (minimum speed limit), the driver of a vehicle that cannot continue to move at the indicated or higher speed on the main lane shall move to the additional lane.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.4.svg" alt="image">
+        <h2>Beginning of the lane</h2>
+        <p>Indicates the beginning of the middle lane section on a three-lane road, which is intended for traffic in a given direction.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.5.svg" alt="image">
+        <h2>End of the lane</h2>
+        <p>Indicates the end of a braking or additional lane on an uphill slope.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.6.svg" alt="image">
+        <h2>End of the lane</h2>
+        <p>Indicates the end of the section of the lane on a three-lane road that is intended for traffic in a given direction.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.7.svg" alt="image">
+        <h2>Direction of traffic on lanes</h2>
+        <p>Indicates the number of lanes and the direction of traffic on each lane. If another sign prohibiting the movement of any vehicle is displayed on sign 5.15.7, the movement of that vehicle on the corresponding lane is prohibited.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.15.8.svg" alt="image">
+        <h2>Number of lanes</h2>
+        <p>Indicates the number of lanes in a given direction and the established traffic regimes on the lanes. The sign is installed in uninhabited areas at a distance of 150-300 meters from the beginning of the road section, in populated areas - at a distance of 50-150 meters.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.16.svg" alt="image">
+        <h2>Bus and/or trolleybus stop</h2>
+        <p>Indicates a bus and/or trolleybus stop and a taxi stand.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.17.svg" alt="image">
+        <h2>Tram stop</h2>
+        <p>Marks a tram stop and a taxi stand.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.18.svg" alt="image">
+        <h2>Taxi stand</h2>
+        <p>Indicates a taxi stand.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.19.1.svg" alt="image">
+        <h2>Pedestrian crossing</h2>
+        <p>A designated area on the road for pedestrian crossings. The sign is placed on the right side of the road. In the absence of markings on the crossing 1.14, the sign is placed at the nearest border of the crossing.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.19.2.svg" alt="image">
+        <h2>Pedestrian crossing</h2>
+        <p>A designated area on the road for pedestrian crossings. The sign is placed on the left side of the road. In the absence of markings on the crossing 1.14, the sign is placed at the far edge of the crossing.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.20.svg" alt="image">
+        <h2>Artificial inequality</h2>
+        <p>Indicates an artificial unevenness on the roadway. The sign is placed on the side of the vehicle approaching the artificial unevenness or the 1.25 marking.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.21.svg" alt="image">
+        <h2>Residential area</h2>
+        <p>An area (zone) where the rules for traffic in a residential area apply. Signs are placed at all entrances to the residential area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.22.svg" alt="image">
+        <h2>End of the residential area</h2>
+        <p>Indicates the end of the residential zone marked with sign 5.21. The sign is placed at all exits from the residential zone.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.23.1.svg" alt="image">
+        <h2>Beginning of the settlement</h2>
+        <p>Indicates the beginning of a settlement in which the rules for traffic in settlements apply. The sign is placed at all entrances to the settlement.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.23.2.svg" alt="image">
+        <h2>Beginning of the settlement</h2>
+        <p>Indicates the beginning of a section of a developed road that does not enter any settlement and in which the rules established for traffic in settlements apply (cottage villages, separate establishments, etc.). The sign is placed at all entrances to the settlement.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.24.1.svg" alt="image">
+        <h2>End of settlement</h2>
+        <p>Indicates the end of the settlement indicated by signs 5.23.1 and 5.23.2, respectively. The sign is placed at all exits of the settlement, at the actual border of the development.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.24.2.svg" alt="image">
+        <h2>End of settlement</h2>
+        <p>Indicates the end of the settlement indicated by signs 5.23.1 and 5.23.2, respectively. The sign is placed at all exits of the settlement, at the actual border of the development.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.25.svg" alt="image">
+        <h2>Beginning of the settlement</h2>
+        <p>Indicates the beginning of a settlement where the rules of traffic in settlements do not apply. The sign is placed at all entrances to the settlement.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.26.svg" alt="image">
+        <h2>End of settlement</h2>
+        <p>Indicates the end of the settlement marked with sign 5.25. The sign is placed at all exits of the settlement, at the actual boundary of the development.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.27.svg" alt="image">
+        <h2>Zone with standing restrictions</h2>
+        <p>Indicates an area within which parking is regulated or the maximum speed of movement is limited. The sign is placed at all entrances to the area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.28.svg" alt="image">
+        <h2>End of the standing restriction zone</h2>
+        <p>Indicates the end of the area marked with sign 5.27. The sign is placed at all exits.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.29.svg" alt="image">
+        <h2>Regulated parking zone</h2>
+        <p>Indicates an area within which parking is regulated or the maximum speed of movement is limited. The sign is placed at all entrances to the area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.30.svg" alt="image">
+        <h2>End of regulated parking zone</h2>
+        <p>Indicates the end of the area marked with sign 5.29. The sign is placed at all exits.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.31.svg" alt="image">
+        <h2>Maximum speed limit zone</h2>
+        <p>Indicates an area within which parking is regulated or the maximum speed of movement is limited. The sign is placed at all entrances to the area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.32.svg" alt="image">
+        <h2>End of maximum speed limit zone</h2>
+        <p>Indicates the end of the area marked with sign 5.31. The sign is placed at all exits.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.33.svg" alt="image">
+        <h2>Pedestrian zone</h2>
+        <p>An area where movement is permitted only for pedestrians. Signs are posted at all entrances to the area.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.34.svg" alt="image">
+        <h2>End of pedestrian zone</h2>
+        <p>Indicates the end of the area marked with sign 5.33. The sign is placed at all exits.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.35.svg" alt="image">
+        <h2>Hospital</h2>
+        <p>Indicates the presence of a medical facility near the road. When passing the sign, the driver should avoid excessive noise as much as possible.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/5/5.36.svg" alt="image">
+        <h2>Place of merger</h2>
+        <p>The point where an exit (ramp) from another road merges with a motorway.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

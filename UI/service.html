@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+    
+    #sidebar {
+      width: 16%;
+      min-width: 225px;
+      max-width: 24%;
+      background-color: #1f1f1f;
+      display: flex;
+      flex-direction: column;
+      border-right: rgba(255, 255, 255, 0.644) 1px solid;
+    }
+
+    #top {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    #icon {
+      padding-top: 0.45rem;
+      padding-left: 0.9rem;
+      max-width: 30%;
+      height: auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 20%;
+    }
+
+    .button {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 1rem 1.7rem;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: 100%;
+      min-height: 50px;
+      text-align: left;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    #exitimg {
+      max-width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    #selected {
+      color: white;
+    }
+
+    #main-content {
+      flex-grow: 1;
+      color: #fff;
+      background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      padding-bottom: 7rem;
+    }
+
+    main {
+      display: flex;
+      height: fit-content;
+      overflow-y: auto;
+      padding: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .card {
+      margin: 5px;
+      background-color: #292929;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      overflow: clip;
+      padding: 10px;
+      width: 350px;
+      height: fit-content;
+      min-width: 200px;
+      min-height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .card img {
+      width: 350px;
+      height: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .card p, .card h2 {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: default;
+    }
+
+    h2{
+      pointer-events: none;
+      z-index: 1;
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+
+    .bbutton {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 15px;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: fit-content;
+      min-height: 50px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .bbutton:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="top">
+      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <a href="file:///home.html" class="button">Home</a>
+      <a href="file:///practice.html" class="button">Practice</a>
+      <a href="file:///stats.html" class="button">Stats</a>
+      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <a href="file:///roadsigns.html" class="bbutton">Back</a>
+    <main>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.1.svg" alt="image">
+        <h2>First aid station</h2>
+        <p>First aid station sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.2.svg" alt="image">
+        <h2>Gas station</h2>
+        <p>Gas station sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.3.svg" alt="image">
+        <h2>Vehicle maintenance</h2>
+        <p>Vehicle maintenance sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.4.svg" alt="image">
+        <h2>Car wash</h2>
+        <p>Car wash sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.5.svg" alt="image">
+        <h2>Telephone</h2>
+        <p>Telephone sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.6.svg" alt="image">
+        <h2>Food point</h2>
+        <p>Food point sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.7.svg" alt="image">
+        <h2>Drinking water</h2>
+        <p>Drinking water sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.8.svg" alt="image">
+        <h2>Hotel or motel</h2>
+        <p>Hotel or motel sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.9.svg" alt="image">
+        <h2>Camping</h2>
+        <p>Camping sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.10.svg" alt="image">
+        <h2>Rest area</h2>
+        <p>Rest area sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.11.svg" alt="image">
+        <h2>Patrol Police Checkpoint</h2>
+        <p>Patrol police checkpoint sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.12.svg" alt="image">
+        <h2>Police</h2>
+        <p>Police sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.13.svg" alt="image">
+        <h2>International Road Transport Control Point</h2>
+        <p>International road transport checkpoint sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.14.svg" alt="image">
+        <h2>Reception zone of a radio station transmitting traffic information</h2>
+        <p>A sign indicating the reception area of ​​a radio station transmitting traffic information.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.15.svg" alt="image">
+        <h2>Emergency service radio communication zone</h2>
+        <p>Emergency service radio communication zone sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.16.svg" alt="image">
+        <h2>Swimming pool or beach</h2>
+        <p>Swimming pool or beach sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/6/6.17.svg" alt="image">
+        <h2>Toilet</h2>
+        <p>Toilet sign.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

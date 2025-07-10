@@ -200,6 +200,68 @@
       text-decoration: none;
     }
 
+
+
+
+
+
+
+    svg{
+      color: white;
+      cursor:pointer;
+      position: fixed;
+      overflow: show;
+      margin: auto;
+      height: auto;
+    }
+    
+    
+    svg:hover{ 
+        -webkit-animation-name: spin;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-iteration-count: 1;
+    }
+    
+    
+    
+    @-ms-keyframes spin {
+        from { -ms-transform: rotate(0deg); }
+        to { -ms-transform: rotate(360deg); }
+    }
+    @-moz-keyframes spin {
+        from { -moz-transform: rotate(0deg); }
+        to { -moz-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+        from { -webkit-transform: rotate(0deg); }
+        to { -webkit-transform: rotate(360deg); }
+    }
+    @keyframes spin {
+        from {
+            transform:rotate(0deg);
+        }
+        to {
+            transform:rotate(360deg);
+        }
+    }
+
+
+
+    #refresh{
+      margin-left: 96%;
+      margin-top: 2%;
+    }
+
+    .tooltip {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      display: none;
+      background: black;
+      color: white;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -214,12 +276,19 @@
   </div>
 
   <div id="main-content">
+    <a href="pycall:update" id="refresh">
+      <svg fill="#FFFFFF" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+      <div class="tooltip">Tooltip text</div>
+    </a>
     <main>
       <div class="row">
         <div class="card">
           <a class="cardlink" href="pycall:testtype_quickstart">
             <h2>
-              Quick Start
+              Quiz Mode
             </h2>
             <p>
               30 questions, 30 minutes, 3 mistakes
@@ -230,30 +299,16 @@
             <img src="https://cdn.discordapp.com/attachments/883277359669735514/1389916431893794947/Untitled.png?ex=68665c0c&is=68650a8c&hm=241ec5b9cf2c5f8ad74148f9f8a28ace8cb152afd377f05fdbd6af2f24959bc0&" alt="start">
           </a>
         </div>
+
         <div class="card">
-          <a class="cardlink" href="pycall:update">
-            <h2>
-              Update Category
-            </h2>
-            <p>
-              Keep the tests up to date
-            </p>
-            <!-- <p>
-              {{progress}}
-            </p> -->
+          <a class="cardlink" href="">
+            <h2>Training Mode</h2>
+            <p>Test with every question in the category</p>
             <img src="https://cdn.discordapp.com/attachments/883277359669735514/1389916431893794947/Untitled.png?ex=68665c0c&is=68650a8c&hm=241ec5b9cf2c5f8ad74148f9f8a28ace8cb152afd377f05fdbd6af2f24959bc0&" alt="start">
           </a>
         </div>
       </div>
       <div class="row">
-        <div class="card">
-          <a class="cardlink" href="">
-            <h2>Entire Category</h2>
-            <p>Test with every question in the category</p>
-            <img src="https://cdn.discordapp.com/attachments/883277359669735514/1389916431893794947/Untitled.png?ex=68665c0c&is=68650a8c&hm=241ec5b9cf2c5f8ad74148f9f8a28ace8cb152afd377f05fdbd6af2f24959bc0&" alt="start">
-          </a>
-        </div>
-        
         <div class="card">
           <a class="cardlink" href="file:///info.html">
             <h2>

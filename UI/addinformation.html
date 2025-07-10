@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+    
+    #sidebar {
+      width: 16%;
+      min-width: 225px;
+      max-width: 24%;
+      background-color: #1f1f1f;
+      display: flex;
+      flex-direction: column;
+      border-right: rgba(255, 255, 255, 0.644) 1px solid;
+    }
+
+    #top {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    #icon {
+      padding-top: 0.45rem;
+      padding-left: 0.9rem;
+      max-width: 30%;
+      height: auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+      color: white;
+      margin-bottom: 20%;
+    }
+
+    .button {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 1rem 1.7rem;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: 100%;
+      min-height: 50px;
+      text-align: left;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    #exitimg {
+      max-width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    #selected {
+      color: white;
+    }
+
+    #main-content {
+      flex-grow: 1;
+      color: #fff;
+      background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      padding-bottom: 7rem;
+    }
+
+    main {
+      display: flex;
+      height: fit-content;
+      overflow-y: auto;
+      padding: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .card {
+      margin: 5px;
+      background-color: #292929;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      overflow: clip;
+      padding: 10px;
+      width: 350px;
+      height: fit-content;
+      min-width: 200px;
+      min-height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .card img {
+      width: 350px;
+      height: 300px;
+      transition: all 0.3s ease;
+    }
+
+    .card p, .card h2 {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: default;
+    }
+
+    h2{
+      pointer-events: none;
+      z-index: 1;
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+
+    .bbutton {
+      background-color: transparent;
+      font-size: 1.25rem;
+      padding: 15px;
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.644);
+      width: fit-content;
+      min-height: 50px;
+      text-align: center;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .bbutton:hover {
+      cursor: pointer;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.137);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="top">
+      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <a href="file:///home.html" class="button">Home</a>
+      <a href="file:///practice.html" class="button">Practice</a>
+      <a href="file:///stats.html" class="button">Stats</a>
+      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <a href="file:///roadsigns.html" class="bbutton">Back</a>
+    <main>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.1.1.-8.1.4.svg" alt="image">
+        <h2>Distance to the object</h2>
+        <p>Indicates the distance from the sign to the beginning of a dangerous section, to the place of introduction of an appropriate restriction or to a certain object (place) located in front of it in the direction of movement. 8.1.2 Indicates the distance from sign 2.3 to the intersection, if sign 2.4 is installed before the intersection. 8.1.3 - 8.1.4 Indicates the distance to an object located beyond the road (away).</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.2.1.-8.2.6.svg" alt="image">
+        <h2>Area of ​​operation</h2>
+        <p>Indicates the length of a dangerous section of the road marked with a warning sign, or the zone of effect of a prohibitory and information-indicative sign. 8.2.2 Indicates the length of a dangerous section of the road marked with a warning sign, or the zone of effect of a prohibitory and information-indicative sign. 8.2.3 Indicates the end of the zone of effect of signs 3.27–3.30. 8.2.4 Provides information to the driver about his presence in the zone of effect of signs 3.27–3.30. 8.2.5 - 8.2.6 The zone of effect of signs 3.27–3.30 when stopping and standing are prohibited along one side of a square, building facade, etc.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.3.1.-8.3.3.svg" alt="image">
+        <h2>Direction of action</h2>
+        <p>Indicates the direction of action of a sign placed before an intersection or the direction of movement towards a specified object located directly on the road.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.1.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies. The signs apply to a truck (with or without a trailer) with a maximum permissible mass exceeding 3.5 tons.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.2.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies. The signs apply to a truck or tractor with any type of trailer or semi-trailer, as well as to a vehicle towing a motor vehicle.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.3.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies. The signs apply to light vehicles;</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.4.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.5.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies. Signs apply the sign</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.6.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.7.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.4.8.svg" alt="image">
+        <h2>Type of vehicle</h2>
+        <p>Indicates the type of vehicle to which the sign applies. The signs extend the validity of the sign to the vehicle indicated by the sign "Dangerous goods".</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.5.1.svg" alt="image">
+        <h2>Saturday, Sunday and holidays</h2>
+        <p>Dangerous goods with a distinctive sign on the said vehicle.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.5.2.svg" alt="image">
+        <h2>Working days</h2>
+        <p>Dangerous goods with a distinctive sign on the said vehicle.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.5.3.svg" alt="image">
+        <h2>Days of the week</h2>
+        <p>Dangerous goods with a distinctive sign on the said vehicle.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.5.4.svg" alt="image">
+        <h2>Validity period</h2>
+        <p>Indicates the time of day or night when the sign is in effect.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.5.5.svg" alt="image">
+        <h2>Validity period</h2>
+        <p>Indicates the days of the week and the time of day or night when the signs are in effect.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.5.6.svg" alt="image">
+        <h2>Validity period</h2>
+        <p>Indicates the days of the week and the time of day or night when the signs are in effect.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.5.7.svg" alt="image">
+        <h2>Validity period</h2>
+        <p>Indicates the days of the week and the time of day or night when the signs are in effect.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.1.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>Specifies the method of parking vehicles in the parking lot; in addition, sign 8.6.1 indicates that all vehicles in the parking lot must park on the carriageway along the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.2.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.3.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.4.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.5.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.6.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.7.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.8.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.6.9.svg" alt="image">
+        <h2>Method of parking a vehicle</h2>
+        <p>It specifies the method of parking a vehicle in a parking lot; in addition, the sign indicates the method of parking a car and a motorcycle adjacent to the sidewalk.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.7.svg" alt="image">
+        <h2>Standing with the engine off</h2>
+        <p>Indicates that parking of vehicles at the parking lot marked with sign 7.4 is permitted only with the engine turned off.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.8.svg" alt="image">
+        <h2>Paid services</h2>
+        <p>Indicates that the service at the parking lot marked with sign 7.4 is paid.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.9.svg" alt="image">
+        <h2>Limitation of standing time</h2>
+        <p>Indicates that the maximum duration of vehicle parking at the parking space indicated by sign 7.4 is limited.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.10.svg" alt="image">
+        <h2>Vehicle inspection location</h2>
+        <p>Indicates that there is an overpass or viewing ditch (pit) on the square marked with 7.4 or 6.10.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.11.svg" alt="image">
+        <h2>Limitation of maximum permissible mass</h2>
+        <p>Indicates that the sign applies only to vehicles whose maximum permissible mass exceeds that indicated on the sign.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.12.svg" alt="image">
+        <h2>Dangerous roadside</h2>
+        <p>Indicates that crossing the roadside is dangerous due to ongoing repair work. The sign is used in conjunction with sign 1.26.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.13.svg" alt="image">
+        <h2>Direction of the main road</h2>
+        <p>Indicates the direction of the main road at an intersection. The sign is erected together with signs 2.1, 2.3 and 2.4 when the main road changes direction at an intersection.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.14.svg" alt="image">
+        <h2>Traffic lane</h2>
+        <p>Indicates the traffic lane to which the sign or traffic light applies. The sign is placed above the traffic lane.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.15.svg" alt="image">
+        <h2>Blind pedestrians</h2>
+        <p>Indicates that a pedestrian crossing is being used by a blind or visually impaired person. The sign is used in conjunction with signs 1.23, 5.19.1 and 5.19.2 and traffic lights.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.16.svg" alt="image">
+        <h2>Wet coating</h2>
+        <p>Indicates that the sign is valid during the period of time when the road surface is wet. The sign is used in conjunction with signs 1.16, 3.20, 3.22 and 3.24.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.17.svg" alt="image">
+        <h2>Person with disabilities</h2>
+        <p>Indicates that the effect of sign 7.4 applies to a vehicle on which the identification sign "Person with disabilities" is attached.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.18.svg" alt="image">
+        <h2>Except for a person with a disability</h2>
+        <p>Indicates that the sign does not apply to a vehicle on which a disabled person identification sign is attached.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.19.svg" alt="image">
+        <h2>Dangerous goods class</h2>
+        <p>Indicates that the sign applies to a vehicle carrying hazardous cargo of the class specified on the sign, as defined by State Standard 19433-88. The sign is used in conjunction with signs 3.32, 3.33 and 4.8.1−4.8.3.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.20.1.-8.20.2.svg" alt="image">
+        <h2>Vehicle type</h2>
+        <p>Indicates the number of axles of a vehicle close to each other, for each of which the mass indicated on sign 3.12 is the permissible norm</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.21.1.svg" alt="image">
+        <h2>Type of minibus vehicle</h2>
+        <p>Indicates a parking lot near a metro station. The sign is used in conjunction with sign 7.4.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.21.2.svg" alt="image">
+        <h2>Type of minibus vehicle</h2>
+        <p>Indicates a bus and/or trolleybus parking area near a metro station. The sign is used in conjunction with sign 7.4.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.21.3.svg" alt="image">
+        <h2>Type of minibus vehicle</h2>
+        <p>Indicates the tram parking area near the metro station. The sign is used in conjunction with sign 7.4.</p>
+      </div>
+      <div class="card">
+        <img src="https://teoria.on.ge/image/signs/2014/8/8.22.1.-8.22.3.svg" alt="image">
+        <h2>Resistance</h2>
+        <p>Used in conjunction with signs 4.2.1, 4.2.2 and 4.2.3 to better orient the driver when going around an obstacle.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
