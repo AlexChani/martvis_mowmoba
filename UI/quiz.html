@@ -190,17 +190,18 @@
 
   <div id="main-content">
     <main>
+      <p id="timer">{{timer}}</p>
       <h2>{{question}}</h2>
       <div id="image">
         <div id="cover">
           <div id="answers">
             <div id="row">
-              <a id="one">{{answer1}}</a>
-              <a id="two">{{answer2}}</a>
+              <a id="one" href="pycall://answer_1">{{answer1}}</a>
+              <a id="two" href="pycall://answer_2">{{answer2}}</a>
             </div>
             <div id="row">
-              <a id="three">{{answer3}}</a>
-              <a id="four">{{answer4}}</a>
+              <a id="three" href="pycall://answer_3">{{answer3}}</a>
+              <a id="four" href="pycall://answer_4">{{answer4}}</a>
             </div>
           </div>
         </div>
