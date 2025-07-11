@@ -106,21 +106,20 @@
     main {
       justify-self: center;
       height: 90%;
-      width: 80%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       overflow-y: auto;
-      padding: 1.5rem;
       z-index: 2;
     }
 
     main h2 {
+      margin-top: 10%;
       position: absolute;
-      width: 40%;
+      width: 70%;
       text-align: center;
-      margin-bottom: 20%;
       text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     }
 
@@ -138,22 +137,24 @@
 
     #image {
       overflow: hidden;
-      width: 70%;
+      width: 80%;
     }
 
     #cover {
-      margin-top: 21.7%;
+      margin-top: 23%;
       position: fixed;
       background-color: #141414;
       border-left: #fff 2px solid;
       border-right: #fff 2px solid;
       border-bottom: #fff 2px solid;
-      width: 46.98%;
+      width: 70%;
       height: 230px;
     }
 
-    img {
-      width: 100%;
+    #questionimage {
+      overflow: hidden;
+      margin-top: 21%;
+      width: 83%;
     }
 
     #one, #two, #three, #four {
@@ -170,6 +171,24 @@
       transition: all 0.3s ease;
     }
 
+    #zero{
+      background-color: black;
+      color: white;
+      font-size: 1.2rem;
+      border: #fff 1px solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 4px;
+    }
+
+    #zero:hover{
+      background-color: rgb(20, 20, 20);
+      cursor: pointer;
+    }
+
     #one:hover, #two:hover, #three:hover, #four:hover{
       background-color: rgb(20, 20, 20);
       cursor: pointer;
@@ -180,7 +199,7 @@
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <img id="icon" src="https://i.imgur.com/ye0BJij.png" alt="icon">
       <a href="file:///home.html" class="button">Home</a>
       <a href="file:///practice.html" class="button">Practice</a>
       <a href="file:///stats.html" class="button">Stats</a>
@@ -191,23 +210,48 @@
   <div id="main-content">
     <main>
       <p id="timer">{{timer}}</p>
+      <a href="pycall:/answer_0" id="zero">Skip</a>
       <h2>{{question}}</h2>
-      <div id="image">
         <div id="cover">
           <div id="answers">
             <div id="row">
-              <a id="one" href="pycall://answer_1">{{answer1}}</a>
-              <a id="two" href="pycall://answer_2">{{answer2}}</a>
+              <a id="one" href="pycall:/answer_1">{{answer1}}</a>
+              <a id="two" href="pycall:/answer_2">{{answer2}}</a>
             </div>
             <div id="row">
-              <a id="three" href="pycall://answer_3">{{answer3}}</a>
-              <a id="four" href="pycall://answer_4">{{answer4}}</a>
+              <a id="three" href="pycall:/answer_3">{{answer3}}</a>
+              <a id="four" href="pycall:/answer_4">{{answer4}}</a>
             </div>
           </div>
         </div>
-        <img src="https://cdn.discordapp.com/attachments/883277359669735514/1392480556683624580/emptyimagefordrivers.png?ex=686fb013&is=686e5e93&hm=161255595f8be7658b6b34771fe77c0084e177f04418c2fb6ba0df6eff94bde3&" alt="questionimage">
-      </div>
+        <img id="questionimage" src="{{questionimage}}" alt="questionimage">
     </main>
   </div>
+  <script>
+  let maxTime = {{max_time_seconds}};
+  let startTimestamp = Date.now();
+
+  function updateTimer() {
+    let elapsed = Math.floor((Date.now() - startTimestamp) / 1000);
+    let remaining = maxTime - elapsed;
+    if (remaining < 0) remaining = 0;
+
+    let minutes = Math.floor(remaining / 60);
+    let seconds = remaining % 60;
+    let timerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    document.getElementById("timer").textContent = timerText;
+
+    if (remaining > 0) {
+      requestAnimationFrame(updateTimer);
+    } else {
+      
+    }
+  }
+
+  window.onload = () => {
+    updateTimer();
+  };
+</script>
 </body>
 </html>

@@ -148,7 +148,7 @@
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <img id="icon" src="https://i.imgur.com/ye0BJij.png" alt="icon">
       <a href="file:///home.html" class="button" id="selected">Home</a>
       <a href="file:///practice.html" class="button">Practice</a>
       <a href="file:///stats.html" class="button">Stats</a>
@@ -166,7 +166,8 @@
       <div class="cards">
         <div class="section">
           <h2>Your Progress</h2>
-          <p>✔️ Tests Taken: {{tests_taken}}<br>
+          <p>➕ Passed tests: {{success_tests}}<br>
+          <br>✔️ Tests Taken: {{tests_taken}}<br>
           <!-- <br>📊 Avg. Score: {{avg_score}}<br> -->
           <br>📅 Last Session: {{last_session}}</p>
         </div>
@@ -174,9 +175,8 @@
         <div class="section">
           <h2>Quick Menu</h2>
           <ul>
-            <li><a href="about.html" class="button">Quick start</a></li>
-            <li><a href="about.html" class="button">Resume Practice</a></li>
-            <li><a href="about.html" class="button">View Mistakes</a></li>
+            <li><a href="file:///quiz_random.html" class="button">Quick start</a></li>
+            <li><a href="file:///mistake_questions.html" class="button">View Mistakes</a></li>
           </ul>
         </div>
       </div>

@@ -92,3 +92,87 @@ def save_and_compare_date():
         return (date.today() - prev_date).days
     else:
         return "0"
+
+
+
+def getPassed():
+    db_path = "DBS/info.db"
+    con = sqlite3.connect(db_path)
+    cur = con.cursor()
+    cur.execute("SELECT passed FROM stats")
+    result = cur.fetchone()
+    con.close()
+    return result[0] if result else None
+
+def getFailed():
+    db_path = "DBS/info.db"
+    con = sqlite3.connect(db_path)
+    cur = con.cursor()
+    cur.execute("SELECT failed FROM stats")
+    result = cur.fetchone()
+    con.close()
+    return result[0] if result else None
+
+def getAllTests():
+    db_path = "DBS/info.db"
+    con = sqlite3.connect(db_path)
+    cur = con.cursor()
+    cur.execute("SELECT total_tests FROM stats")
+    result = cur.fetchone()
+    con.close()
+    return result[0] if result else None
+
+
+
+def get_wrong_questions_html():
+    category = getCategory()
+    question_db_path = f"DBs/questions_{category}.db"
+
+    info_con = sqlite3.connect("DBs/info.db")
+    info_cur = info_con.cursor()
+    info_cur.execute("SELECT qid FROM wrong_questions")
+    qid_list = [row[0] for row in info_cur.fetchall()]
+    info_con.close()
+
+    if not qid_list:
+        return "<p>No mistakes recorded yet.</p>"
+
+    placeholders = ",".join(["?"] * len(qid_list))
+    con = sqlite3.connect(question_db_path)
+    cur = con.cursor()
+    cur.execute(f"SELECT qid, text, desc FROM questions WHERE qid IN ({placeholders})", qid_list)
+    rows = cur.fetchall()
+    con.close()
+
+    table_html = "<table><tr><th>QID</th><th>Question</th><th>Description</th></tr>"
+    for qid, text, desc in rows:
+        table_html += f"<tr><td>{qid}</td><td>{text}</td><td>{desc}</td></tr>"
+    table_html += "</table>"
+    return table_html
+
+
+def get_most_failed_theme_name():
+    category = getCategory()
+    info_con = sqlite3.connect("DBs/info.db")
+    info_cur = info_con.cursor()
+
+    info_cur.execute("SELECT theme_id FROM failed_themes ORDER BY failures DESC LIMIT 1")
+    result = info_cur.fetchone()
+    info_con.close()
+
+    if not result:
+        return "No failed themes recorded."
+
+    theme_id = result[0]
+
+    db_path = f"DBs/questions_{category}.db"
+    q_con = sqlite3.connect(db_path)
+    q_cur = q_con.cursor()
+    q_cur.execute("SELECT name FROM themes WHERE id = ?", (theme_id,))
+    theme_row = q_cur.fetchone()
+    q_con.close()
+
+    if theme_row:
+        return theme_row[0]
+    else:
+        return "Unknown theme"

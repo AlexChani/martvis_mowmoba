@@ -50,6 +50,10 @@
       margin-bottom: 20%;
     }
 
+    h2 {
+      text-align: center;
+    }
+
     .button {
       background-color: transparent;
       font-size: 1.25rem;
@@ -104,19 +108,129 @@
     }
 
     main {
+      display: grid;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       overflow-y: auto;
       padding: 1.5rem;
+      align-items: center;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      overflow: clip;
+      padding: 0;
+      width: 350px;
+      height: 275px;
+      min-width: 200px;
+      min-height: 200px;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 2px 2px 30px black;
+    }
+
+    #disabledcontinue {
+      overflow: clip;
+      padding: 0;
+      width: 350px;
+      height: 275px;
+      min-width: 200px;
+      min-height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.041);
+      color: grey;
+    }
+
+    #disabledcontinue h2, #disabledcontinue p {
+      color: grey;
+    }
+
+    #disabledcontinue:hover {
+      box-shadow: none;
+    }
+
+    .row {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+    }
+
+    .cardlink {
+      overflow: clip;
+      padding: 0;
+      width: 350px;
+      height: 275px;
+      min-width: 200px;
+      min-height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      flex-direction: column;
+    }
+
+    .cardnonlink {
+      overflow: clip;
+      padding: 0;
+      width: 350px;
+      height: 275px;
+      min-width: 200px;
+      min-height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      flex-direction: column;
+    }
+
+    .cardlink:hover{
+      background-color: #ffffff3a;
+    }
+
+    .cardlink img {
+      position: fixed;
+      opacity: 0;
+      width: 200px;
+      height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .cardlink img:hover {
+      opacity: 1;
+      width: 350px;
+      height: 350px;
+    }
+
+    .card p, .card h2 {
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    h3 {
+      color: white;
+      text-align: center;
+      font-size: large;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://cdn.discordapp.com/attachments/883277359669735514/1389617266894835855/2.png?ex=68673fae&is=6865ee2e&hm=a40fc387a7697918282ee3c0677f0097205e2e6d14ebc551e6de8d608c81d4fe&" alt="icon">
+      <img id="icon" src="https://i.imgur.com/ye0BJij.png" alt="icon">
       <a href="file:///home.html" class="button">Home</a>
       <a href="file:///practice.html" class="button">Practice</a>
       <a href="file:///stats.html" class="button" id="selected">Stats</a>
@@ -126,7 +240,28 @@
 
   <div id="main-content">
     <main>
-        <h1>stats</h1>
+      <div class="row">
+        <div class="card">
+          <a class="cardnonlink">
+            <h2>
+              Theme to practice
+            </h2>
+            <p>
+              (Theme with most mistakes)
+            </p>
+            <h3>
+              {{focus_theme}}
+            </h3>
+          </a>
+        </div>
+
+        <div class="card">
+          <a class="cardlink" href="file:///mistake_questions.html">
+            <h2>See all the questions you answered wrong</h2>
+            <img src="https://i.imgur.com/wNf9V5Z.png" alt="start">
+          </a>
+        </div>
+      </div>
     </main>
   </div>
 </body>

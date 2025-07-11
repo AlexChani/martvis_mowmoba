@@ -2,9 +2,10 @@ import os
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEnginePage
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QTimer
 from PyQt5.QtGui import QIcon
 import infoManager
+from quiz import ConsoleQuiz, ConsoleSequentialQuiz
 
 # paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,8 +28,12 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Drivers License App")
-        self.setWindowIcon(QIcon(ICON_PATH))  # ✅ Taskbar icon
+        self.setWindowIcon(QIcon(ICON_PATH))
         self.setMinimumSize(1500, 1050)
+
+        self.quiz = None
+        self.quiz_timer = QTimer()
+        self.quiz_timer.timeout.connect(self.update_quiz_ui)
 
         self.view = QWebEngineView()
         self.view.setPage(CustomWebEnginePage(self.view, self.handle_pycall))
@@ -56,6 +61,15 @@ class MainWindow(QMainWindow):
 
         with open(page_path, "r", encoding="utf-8") as f:
             html = f.read()
+
+        if page_name != "quiz_random.html" and hasattr(self, "quiz") and self.quiz:
+            try:
+                if hasattr(self.quiz, "timer") and self.quiz.timer.isActive():
+                    self.quiz.timer.stop()
+                self.quiz_timer.stop()
+            except Exception as e:
+                print("Error stopping timers:", e)
+            self.quiz = None
 
         # html = html.replace("{{username}}", get_username())
 
@@ -104,10 +118,34 @@ class MainWindow(QMainWindow):
         elif page_name == "home.html":
             name = infoManager.getName()
             html = html.replace("{{username}}", name)
+            html = html.replace("{{success_tests}}", str(infoManager.getPassed()))
+            html = html.replace("{{tests_taken}}", str(infoManager.getAllTests()))
             if infoManager.save_and_compare_date() != 0:
                 html = html.replace("{{last_session}}", str(infoManager.save_and_compare_date()) + " days ago")
             else:
                 html = html.replace("{{last_session}}", "No previous session")
+        elif page_name == "quiz_random.html":
+            if self.quiz is None:
+                self.quiz = ConsoleQuiz()
+            html = self.render_quiz_html(html)
+            self.quiz_timer.start(1000)
+        elif page_name == "quiz_sequential.html":
+            from quiz import ConsoleSequentialQuiz
+            self.quiz = ConsoleSequentialQuiz()
+            html = self.render_quiz_html(html)
+        elif page_name == "quiz_result.html":
+            if hasattr(self, 'last_quiz_result'):
+                result = self.last_quiz_result
+                html = html.replace("{{score}}", str(result["score"]))
+                html = html.replace("{{total}}", str(result["total"]))
+                html = html.replace("{{mistakes}}", str(result["mistakes"]))
+                html = html.replace("{{result_text}}", "Passed" if result["passed"] else "Failed")
+        elif page_name == "mistake_questions.html":
+            mistake_questions_questions_table_html = infoManager.get_wrong_questions_html()
+            html = html.replace("{{wrong_questions_table}}", mistake_questions_questions_table_html)
+        elif page_name == "stats.html":
+            failed_theme_name = infoManager.get_most_failed_theme_name()
+            html = html.replace("{{focus_theme}}", failed_theme_name)
 
         self.view.setHtml(html, QUrl.fromLocalFile(page_path))
 
@@ -130,25 +168,125 @@ class MainWindow(QMainWindow):
         if action == "submit_name":
             name = query.get("name", [""])[0]
             category = query.get("category", [""])[0]
-
             infoManager.signin(name, category)
-
             self.load_page("home.html")
-        #elif action == "toggle_test_state":
-            #self.test_in_progress = not self.test_in_progress
-            #self.load_page("practice.html")
-        elif action.startswith("testtype_"):
-            test_type = action.replace("testtype_", "")
-            self.start_test(test_type)
-            self.load_page("quiz.html")
+        elif action.startswith("answer_"):
+            if not hasattr(self, 'quiz'):
+                print("Quiz not initialized yet")
+                return
+
+            print(action)
+            ans_str = action.split("_")[1]
+            if ans_str.isdigit():
+                print(ans_str)
+                answer_num = int(ans_str)
+                if answer_num == 0:
+                    self.quiz.skip_current_question()
+                else:
+                    valid, msg = self.quiz.answer_current_question(answer_num)
+                    print(msg)
+                self.update_quiz_ui()
         elif action.startswith("update"):
             import scraper
             scraper.scrape_category(infoManager.getCategory(), self.show_progress)
 
+    def render_quiz_html(self, html):
+        question = self.quiz.get_current_question_text()
+        answers = self.quiz.get_current_answers()
+        image = self.quiz.get_current_image()
 
-#    def toggle_test_state(self):
-#        self.test_in_progress = not self.test_in_progress
-#        self.load_page("practice.html")
+        ans1 = answers.get(1, "")
+        ans2 = answers.get(2, "")
+        ans3 = answers.get(3, "")
+        ans4 = answers.get(4, "")
+
+        html = html.replace("{{question}}", question)
+        html = html.replace("{{answer1}}", ans1)
+        html = html.replace("{{answer2}}", ans2)
+        html = html.replace("{{answer3}}", ans3)
+        html = html.replace("{{answer4}}", ans4)
+        html = html.replace("{{questionimage}}", image)
+
+        try:
+            max_time = getattr(self.quiz, "max_time", None)
+            if max_time is not None:
+                import time
+                elapsed = int(time.time() - self.quiz.start_time)
+                time_left = max(0, max_time - elapsed)
+                html = html.replace("{{max_time_seconds}}", str(max_time))
+            else:
+                html = html.replace("{{max_time_seconds}}", "∞")
+        except Exception as e:
+            print("Timer placeholder error:", e)
+            html = html.replace("{{max_time_seconds}}", "∞")
+
+        return html
+
+    def update_quiz_ui(self):
+        if not self.quiz:
+            return
+
+        if self.quiz.is_finished():
+            self.quiz_timer.stop()
+            self.quiz.end_quiz()
+
+            if isinstance(self.quiz, ConsoleSequentialQuiz):
+                result_data = {
+                    "score": self.quiz.get_score(),
+                    "total": self.quiz.get_total_questions(),
+                    "mistakes": self.quiz.get_mistakes(),
+                    "passed": True
+                }
+            else:
+                result_data = {
+                    "score": self.quiz.get_score(),
+                    "total": self.quiz.get_total_questions(),
+                    "mistakes": self.quiz.get_mistakes(),
+                    "passed": self.quiz.get_mistakes() < 3
+                }
+
+            self.quiz = None
+            self.load_quiz_result(result_data)
+            return
+
+        question = self.quiz.get_current_question_text()
+        answers = self.quiz.get_current_answers()
+        image = self.quiz.get_current_image()
+        timer_text = self.quiz.get_timer_text()
+
+        js_code = f"""
+            document.querySelector('h2').innerText = {repr(question)};
+            document.getElementById('one').innerText = {repr(answers.get(1, ""))};
+            document.getElementById('two').innerText = {repr(answers.get(2, ""))};
+            document.getElementById('three').innerText = {repr(answers.get(3, ""))};
+            document.getElementById('four').innerText = {repr(answers.get(4, ""))};
+            document.getElementById('questionimage').src = {repr(image)};
+            document.getElementById('timer').innerText = {repr(timer_text)};
+        """
+        self.view.page().runJavaScript(js_code)
+
+    def load_quiz_result(self, result_data):
+        html_path = os.path.join(PAGES_DIR, "quiz_result.html")
+        with open(html_path, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        html = html.replace("{{score}}", str(result_data["score"]))
+        html = html.replace("{{total}}", str(result_data["total"]))
+        html = html.replace("{{mistakes}}", str(result_data["mistakes"]))
+        html = html.replace("{{result_text}}", "Passed" if result_data["passed"] else "Failed")
+
+        self.view.setHtml(html, QUrl.fromLocalFile(html_path))
+
+        def on_load_finished(ok):
+            if ok:
+                pass
+            self.view.loadFinished.disconnect(on_load_finished)
+
+        self.view.loadFinished.connect(on_load_finished)
+
+    def load_quiz_result(self, result_data):
+        self.last_quiz_result = result_data
+        self.load_page("quiz_result.html")
 
 
 if __name__ == "__main__":
