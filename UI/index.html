@@ -32,8 +32,8 @@
     }
 
     .button:hover {
-      color: white;
-      background-color: rgba(255, 255, 255, 0.137);
+      color: rgb(0, 0, 0);
+      background-color: #ffb83b;
     }
 
     button {
@@ -67,6 +67,7 @@
       width: 30%;
       background-color: #303030;
       border-radius: 10px;
+      border: #ffb83b 1px solid;
     }
 
     input, select{
@@ -77,7 +78,7 @@
       outline: none;
       border: rgba(255, 255, 255, 0.452) solid 1px;
       border-radius: 1px;
-      color: white;
+      color: #ffb83b;
       font-size: large;
       text-align: center;
     }
@@ -87,7 +88,7 @@
   <div id="main-content">
     <main>
          <form onsubmit="return validateForm()" id="signin">
-            <img id="icon" src="https://i.imgur.com/ye0BJij.png" alt="icon">
+            <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
             <label for="name">Name:</label>
             <input type="text" id="name" placeholder="Your name" maxlength="20" required><br><br>
             <label for="category">Category:</label>
