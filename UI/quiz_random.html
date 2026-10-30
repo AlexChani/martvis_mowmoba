@@ -265,11 +265,35 @@
     answerGrid.classList.toggle("two-answers", visibleAnswers <= 2);
     answerGrid.classList.toggle("three-answers", visibleAnswers === 3);
     answerGrid.classList.toggle("one-answer", visibleAnswers === 1);
+
+    requestAnimationFrame(() => {
+      buttons.forEach(button => {
+        if (button.hidden || !button.clientWidth || !button.clientHeight) return;
+
+        button.style.fontSize = "";
+        let fontSize = parseFloat(window.getComputedStyle(button).fontSize);
+        while (fontSize > 10 && (button.scrollHeight > button.clientHeight + 1 || button.scrollWidth > button.clientWidth + 1)) {
+          fontSize -= 1;
+          button.style.fontSize = `${fontSize}px`;
+        }
+
+        button.style.overflowY = button.scrollHeight > button.clientHeight + 1 ? "auto" : "hidden";
+      });
+    });
   }
 
-  questionImage.addEventListener("load", fitQuestionImage);
-  window.addEventListener("resize", fitQuestionImage);
-  const questionResizeObserver = window.ResizeObserver ? new ResizeObserver(fitQuestionImage) : null;
+  questionImage.addEventListener("load", () => {
+    fitQuestionImage();
+    updateAnswerButtons();
+  });
+  window.addEventListener("resize", () => {
+    fitQuestionImage();
+    updateAnswerButtons();
+  });
+  const questionResizeObserver = window.ResizeObserver ? new ResizeObserver(() => {
+    fitQuestionImage();
+    updateAnswerButtons();
+  }) : null;
   if (questionResizeObserver) questionResizeObserver.observe(questionArea);
 
   if (questionImage.complete) fitQuestionImage();
