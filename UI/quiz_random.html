@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: sans-serif;
@@ -196,39 +197,84 @@
     }
 
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
-<body>
+<body class="quiz-body">
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
-      <a href="file:///home.html" class="button">Home</a>
-      <a href="file:///practice.html" class="button">Practice</a>
-      <a href="file:///stats.html" class="button">Stats</a>
-      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+      <img id="icon" src="Images/brand-logo.png" alt="App logo">
+      <a href="home.html" class="button">Home</a>
+      <a href="practice.html" class="button">Practice</a>
+      <a href="stats.html" class="button">Stats</a>
+      <a href="schoolsmap.html" class="button">Driving Schools</a>
     </div>
   </div>
 
   <div id="main-content">
-    <main>
+    <main class="quiz-page">
       <p id="timer">{{timer}}</p>
       <a href="pycall:/answer_0" id="zero">Skip</a>
       <h2>{{question}}</h2>
-        <div id="cover">
-          <div id="answers">
-            <div id="row">
-              <a id="one" href="pycall:/answer_1">{{answer1}}</a>
-              <a id="two" href="pycall:/answer_2">{{answer2}}</a>
-            </div>
-            <div id="row">
-              <a id="three" href="pycall:/answer_3">{{answer3}}</a>
-              <a id="four" href="pycall:/answer_4">{{answer4}}</a>
+        <div class="question-area" id="question-area">
+          <div class="question-stage" id="question-stage">
+            <img id="questionimage" src="{{questionimage}}" alt="questionimage">
+            <div id="cover">
+              <div id="answers">
+                <div class="answer-row">
+                  <a id="one" href="pycall:/answer_1">{{answer1}}</a>
+                  <a id="two" href="pycall:/answer_2">{{answer2}}</a>
+                </div>
+                <div class="answer-row">
+                  <a id="three" href="pycall:/answer_3">{{answer3}}</a>
+                  <a id="four" href="pycall:/answer_4">{{answer4}}</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <img id="questionimage" src="{{questionimage}}" alt="questionimage">
     </main>
   </div>
   <script>
+  const questionArea = document.getElementById("question-area");
+  const questionStage = document.getElementById("question-stage");
+  const questionImage = document.getElementById("questionimage");
+
+  function fitQuestionImage() {
+    if (!questionImage.naturalWidth || !questionArea.clientWidth || !questionArea.clientHeight) return;
+
+    const styles = window.getComputedStyle(questionArea);
+    const verticalPadding = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
+    const availableWidth = questionArea.clientWidth;
+    const availableHeight = questionArea.clientHeight - verticalPadding;
+    const scale = Math.min(availableWidth / questionImage.naturalWidth, availableHeight / questionImage.naturalHeight);
+
+    questionStage.style.width = `${Math.floor(questionImage.naturalWidth * scale)}px`;
+    questionStage.style.height = `${Math.floor(questionImage.naturalHeight * scale)}px`;
+  }
+
+  function updateAnswerButtons() {
+    const answerGrid = document.getElementById("answers");
+    const buttons = [...answerGrid.querySelectorAll("a")];
+    let visibleAnswers = 0;
+
+    buttons.forEach(button => {
+      button.hidden = button.textContent.trim() === "";
+      if (!button.hidden) visibleAnswers++;
+    });
+
+    answerGrid.classList.toggle("two-answers", visibleAnswers <= 2);
+    answerGrid.classList.toggle("three-answers", visibleAnswers === 3);
+    answerGrid.classList.toggle("one-answer", visibleAnswers === 1);
+  }
+
+  questionImage.addEventListener("load", fitQuestionImage);
+  window.addEventListener("resize", fitQuestionImage);
+  const questionResizeObserver = window.ResizeObserver ? new ResizeObserver(fitQuestionImage) : null;
+  if (questionResizeObserver) questionResizeObserver.observe(questionArea);
+
+  if (questionImage.complete) fitQuestionImage();
+  updateAnswerButtons();
+
   let maxTime = {{max_time_seconds}};
   let startTimestamp = Date.now();
 

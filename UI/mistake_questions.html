@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       display: flex;
@@ -92,8 +93,15 @@
     #main-content {
       flex-grow: 1;
       color: #fff;
-      background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      background: transparent;
       padding-bottom: 7rem;
+    }
+
+    body {
+      background-color: #1f1f1f;
+      background-image: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
+      background-size: 100% 100vh;
+      background-repeat: no-repeat;
     }
 
     main {
@@ -198,19 +206,19 @@
     th, td { 
     border: 1px solid #cccccc; padding: 8px;
     }
-    th { 
-    background-color: #f2f2f24b;
-    }
+    .wrong-questions-table th,
+    .wrong-questions-table td { background: transparent; }
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
-      <a href="file:///home.html" class="button">Home</a>
-      <a href="file:///practice.html" class="button">Practice</a>
-      <a href="file:///stats.html" class="button" id="selected">Stats</a>
-      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+      <img id="icon" src="Images/brand-logo.png" alt="App logo">
+      <a href="home.html" class="button">Home</a>
+      <a href="practice.html" class="button">Practice</a>
+      <a href="stats.html" class="button" id="selected">Stats</a>
+      <a href="schoolsmap.html" class="button">Driving Schools</a>
     </div>
   </div>
 

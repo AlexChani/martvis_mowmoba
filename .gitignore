@@ -1,0 +1,18 @@
+# local keys
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# files python makes
+__pycache__/
+*.py[cod]
+.venv/
+# built app files
+/build/
+/dist/
+/.idea/
+
+# saved profile and quiz progress
+/DBs/info.db*

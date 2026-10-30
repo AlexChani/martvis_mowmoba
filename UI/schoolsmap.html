@@ -1,164 +1,291 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Driving Schools</title>
   <style>
     body {
-      font-family: sans-serif;
-      font-weight: 600;
+      display: flex;
+      min-height: 100vh;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
       overflow: hidden;
-      display: flex;
+      font-family: sans-serif;
+      font-weight: 600;
     }
-
     #sidebar {
-      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
       width: 16%;
       min-width: 180px;
       max-width: 24%;
-      background-color: #1f1f1f;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
       height: 100vh;
-      border-right: #ffb83b 1px solid;
-      padding-bottom: 3%;
-    }
-
-    #top {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      flex-grow: 1;
-    }
-
-    #icon {
-      padding-top: 0.45rem;
-      padding-left: 0.9rem;
-      max-width: 30%;
-      height: auto;
-    }
-
-    h1 {
       margin: 0;
-      font-size: 1.5rem;
-      text-align: center;
-      color: white;
-      margin-bottom: 20%;
+      padding: 0 0 3%;
+      box-sizing: border-box;
+      background-color: #1f1f1f;
+      border-right: 1px solid #ffb83b;
     }
-
+    #top { display: flex; flex: 1; flex-direction: column; width: 100%; }
+    #icon { max-width: 30%; height: auto; padding: 0.45rem 0 0 0.9rem; }
     .button {
-      background-color: transparent;
-      font-size: 1.25rem;
-      padding: 1rem 1.7rem;
       display: inline-block;
-      text-decoration: none;
-      color: rgba(255, 255, 255, 0.644);
       width: 100%;
       min-height: 50px;
-      text-align: left;
+      padding: 1rem 1.7rem;
       box-sizing: border-box;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.644);
+      font-size: 1.25rem;
+      text-align: left;
+      text-decoration: none;
       transition: all 0.3s ease;
     }
-
-    .button:hover {
-      color: rgb(0, 0, 0);
-      background-color: #ffb83b;
-    }
-
-    button {
-      cursor: pointer;
-      padding: 0;
-      border: none;
-      outline: none;
-      background-color: transparent;
-    }
-
-    #sidebar > a:last-child {
-      margin-top: auto;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-
-    #exitimg {
-      max-width: 100px;
-      height: auto;
-      display: block;
-    }
-
-    #selected {
-      color: rgb(0, 0, 0);
-      background-color: #ffb83b;
-    }
-
+    .button:hover { color: #000; background-color: #ffb83b; }
+    #selected { color: #000; background-color: #ffb83b; }
     #main-content {
-      flex-grow: 1;
+      display: flex;
+      flex: 1 1 0;
+      flex-direction: column;
+      min-width: 0;
       color: #fff;
       background: linear-gradient(to bottom, #4b4b4b 0%, #1f1f1f 25%);
     }
-
-    main {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow-y: auto;
+    main { display: flex; flex-direction: column; }
+    .map-page { flex: 1; min-height: 0; padding: clamp(1rem, 2vw, 1.5rem); }
+    .map-heading { margin: 0 0 1rem; }
+    .map-heading h1 { margin: 0 0 0.35rem; text-align: left; }
+    .map-heading p { margin: 0; color: rgba(255, 255, 255, 0.72); }
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 310px);
+      gap: 1rem;
+      min-height: 420px;
+      height: calc(100vh - 145px);
+      height: calc(100dvh - 145px);
+    }
+    .map-frame, .school-panel {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 184, 59, 0.55);
+      border-radius: 10px;
+      background: #292929;
+    }
+    #map { position: relative; width: 100%; height: 100%; min-height: 0; background: #292929; }
+    #map-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      padding: 2rem;
+      color: #fff;
+      text-align: center;
+      pointer-events: none;
+    }
+    .school-panel { display: flex; flex-direction: column; }
+    .school-panel h2 { margin: 0; padding: 1rem 1rem 0.75rem; font-size: 1.15rem; }
+    #school-search {
+      margin: 0 1rem 0.75rem;
+      padding: 0.7rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
+      background: #1f1f1f;
+      color: #fff;
+      font: inherit;
+    }
+    #school-status { min-height: 1.25rem; margin: 0 1rem 0.5rem; color: rgba(255, 255, 255, 0.68); font-size: 0.85rem; }
+    #school-list { overflow-y: auto; padding: 0 0.75rem 0.75rem; }
+    .school-item {
+      width: 100%;
+      margin: 0 0 0.5rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      text-align: left;
+      cursor: pointer;
+    }
+    .school-item:hover, .school-item:focus { border-color: #ffb83b; outline: none; }
+    .school-item strong { display: block; margin-bottom: 0.25rem; color: #ffb83b; }
+    .school-item span { display: block; font-size: 0.9rem; font-weight: 400; line-height: 1.4; }
+    .school-dot { border: 2px solid #1f1f1f; border-radius: 50%; background: #ffb83b; box-shadow: 0 1px 5px #000; }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #292929; color: #fff; }
+    .leaflet-popup-content a { color: #ffb83b; }
+    @media (max-width: 760px) {
+      .map-layout { grid-template-columns: 1fr; grid-template-rows: minmax(280px, 1fr) minmax(190px, 38%); height: auto; min-height: 75dvh; }
+      .map-frame { min-height: 300px; }
+      .school-panel { min-height: 190px; }
+      #school-list { max-height: 230px; }
     }
   </style>
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
-      <a href="file:///home.html" class="button">Home</a>
-      <a href="file:///practice.html" class="button">Practice</a>
-      <a href="file:///stats.html" class="button">Stats</a>
-      <a href="file:///schoolsmap.html" class="button" id="selected">Driving Schools</a>
+      <img id="icon" src="Images/brand-logo.png" alt="App logo">
+      <a href="home.html" class="button">Home</a>
+      <a href="practice.html" class="button">Practice</a>
+      <a href="stats.html" class="button">Stats</a>
+      <a href="schoolsmap.html" class="button" id="selected">Driving Schools</a>
     </div>
   </div>
 
   <div id="main-content">
-    <main>
-        <div id="map" style="height: 100%; width: 100%;"></div>
+    <main class="map-page">
+      <header class="map-heading">
+        <h1>Driving Schools in Georgia</h1>
+        <p>Showing driving schools across Georgia. Select a school to see where it is on the map.</p>
+      </header>
+      <section class="map-layout" aria-label="Driving schools map and directory">
+        <div class="map-frame">
+          <div id="map" aria-label="Map of driving schools">
+            <p id="map-fallback">Loading map…</p>
+          </div>
+        </div>
+        <aside class="school-panel">
+          <h2>Schools in Georgia</h2>
+          <input id="school-search" type="search" placeholder="Search schools or cities" aria-label="Search schools">
+          <p id="school-status" aria-live="polite">Loading map…</p>
+          <div id="school-list"></div>
+        </aside>
+      </section>
     </main>
   </div>
 
-<script>
-    const map = L.map('map').setView([41.7151, 44.8271], 12);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a> contributors',
-      subdomains: 'abcd',
-      maxZoom: 19
-    }).addTo(map);
+  <script>
+    const schools = []; // python adds the school list here
+    const schoolList = document.getElementById('school-list');
+    const schoolStatus = document.getElementById('school-status');
+    const searchInput = document.getElementById('school-search');
+    let map;
+    let markers = [];
+    const georgiaBounds = [[41.0, 40.0], [43.7, 46.8]];
 
-    const customIcon = L.icon({
-      iconUrl: 'https://i.imgur.com/ed8YGSH.png',
-      iconSize: [32, 32],
-      iconAnchor: [16, 32],
-      popupAnchor: [0, -32]
-    });
+    function escapeHtml(value) {
+      return String(value || '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[char]);
+    }
 
-    const schools = {{school_data}};
+    function renderSchools(query = '') {
+      const search = query.trim().toLowerCase();
+      const matches = schools.map((school, index) => ({ school, index })).filter(({ school }) =>
+        `${school.name} ${school.address} ${school.phone}`.toLowerCase().includes(search)
+      );
 
-    schools.forEach(school => {
-          const marker = L.marker([school.lat, school.lon], { icon: customIcon }).addTo(map);
-      let content = `<b>${school.name}</b><br>${school.address}<br>${school.phone}`;
-      if (school.website) {
-        // content += `<br><a href="${school.website}" target="_blank">Website</a>`;
-        content += `<br>Website: ${school.website}`;
+      schoolList.innerHTML = matches.length ? matches.map(({ school, index }) => `
+        <button class="school-item" type="button" data-index="${index}">
+          <strong>${escapeHtml(school.name)}</strong>
+          <span>${escapeHtml(school.address)}</span>
+          ${school.phone ? `<span>${escapeHtml(school.phone)}</span>` : ''}
+        </button>
+      `).join('') : '<p class="school-item">No schools found.</p>';
+
+      schoolList.querySelectorAll('[data-index]').forEach(button => {
+        button.addEventListener('click', () => {
+          const marker = markers[Number(button.dataset.index)];
+          if (map && marker) {
+            map.flyTo(marker.getLatLng(), 15);
+            marker.openPopup();
+          }
+        });
+      });
+
+      schoolStatus.textContent = `${matches.length} school${matches.length === 1 ? '' : 's'} listed${map ? ' · Map ready' : ' · Map is unavailable'}`;
+    }
+
+    function startMap() {
+      if (!window.L) {
+        document.getElementById('map-fallback').textContent = 'The map library could not load. You can still search the school list.';
+        renderSchools(searchInput.value);
+        return;
       }
-      marker.bindPopup(content);
-    });
+
+      const mapContainer = document.getElementById('map');
+      if (mapContainer._leaflet_id) {
+        if (map) {
+          map.invalidateSize();
+          map.fitBounds(georgiaBounds, { padding: [20, 20] });
+        }
+        return;
+      }
+
+      let tileLayer;
+      let usingBackupTiles = false;
+      const tileSources = [
+        {
+          url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+        },
+        {
+          url: 'https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+          attribution: '&copy; OpenStreetMap contributors, Tiles style by HOT'
+        }
+      ];
+
+      function loadTiles(sourceIndex) {
+        const source = tileSources[sourceIndex];
+        tileLayer = L.tileLayer(source.url, {
+          attribution: source.attribution,
+          maxZoom: 19
+        });
+        tileLayer.on('tileload', () => {
+          const fallback = document.getElementById('map-fallback');
+          if (fallback) fallback.remove();
+        });
+        tileLayer.on('tileerror', () => {
+          if (sourceIndex === 0 && !usingBackupTiles) {
+            usingBackupTiles = true;
+            map.removeLayer(tileLayer);
+            loadTiles(1);
+            return;
+          }
+          if (sourceIndex === 0) return;
+          const fallback = document.getElementById('map-fallback');
+          if (fallback) fallback.textContent = 'Map tiles could not load. Check your internet connection.';
+          schoolStatus.textContent = 'Map tiles could not load. Check your internet connection.';
+        });
+        tileLayer.addTo(map);
+      }
+
+      map = L.map('map');
+      map.fitBounds(georgiaBounds, { padding: [20, 20] });
+      /* use backup tiles if openstreetmap fails */
+      loadTiles(0);
+
+      const schoolIcon = L.divIcon({
+        className: '',
+        html: '<div class="school-dot" style="width:18px;height:18px"></div>',
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+      });
+
+      markers = schools.map(school => {
+        const marker = L.marker([school.lat, school.lon], { icon: schoolIcon }).addTo(map);
+        const website = school.website
+          ? `<br><a href="${escapeHtml(school.website)}">Open website</a>`
+          : '';
+        marker.bindPopup(`<strong>${escapeHtml(school.name)}</strong><br>${escapeHtml(school.address)}<br>${escapeHtml(school.phone)}${website}`);
+        return marker;
+      });
+
+      map.whenReady(() => {
+        map.invalidateSize();
+        map.fitBounds(georgiaBounds, { padding: [20, 20] });
+        renderSchools(searchInput.value);
+      });
+      window.addEventListener('resize', () => map.invalidateSize());
+    }
+
+    searchInput.addEventListener('input', () => renderSchools(searchInput.value));
+    renderSchools();
+    startMap();
   </script>
 </body>
 </html>

@@ -1,0 +1,590 @@
+/* let pages fit different screens */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+}
+
+#sidebar {
+  flex: 0 0 clamp(150px, 16vw, 240px);
+  width: clamp(150px, 16vw, 240px);
+  max-width: none;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  padding-bottom: 0;
+}
+
+#main-content {
+  position: relative;
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 0;
+}
+
+main {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  padding: clamp(1rem, 2.5vw, 2rem);
+}
+
+img:not(.leaflet-tile),
+svg,
+video {
+  max-width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.wrong-questions-table {
+  min-width: 760px;
+  table-layout: fixed;
+}
+
+.wrong-questions-table th:first-child,
+.wrong-questions-table td:first-child {
+  width: 6.5rem;
+}
+
+.wrong-questions-table .question-id {
+  white-space: nowrap;
+  text-align: center;
+}
+
+th,
+td {
+  overflow-wrap: anywhere;
+}
+
+.row {
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+#icon {
+  display: block;
+  width: min(88px, 58%);
+  max-width: 88px;
+  height: auto;
+  margin: 0.75rem 0.9rem 1rem;
+  padding: 0;
+}
+
+#signin #icon {
+  align-self: center;
+  margin: 0 auto 1rem;
+}
+
+.card,
+.cardlink,
+.cardnonlink,
+#disabledcontinue {
+  width: min(100%, 350px);
+  min-width: 0;
+}
+
+.card {
+  overflow: hidden;
+  height: 275px;
+  border: 0;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  transition: box-shadow 0.18s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.3);
+}
+
+.cardlink,
+.cardnonlink {
+  position: relative;
+  height: 100%;
+  padding: 0.75rem;
+  color: #fff;
+  text-align: center;
+  border-radius: inherit;
+}
+
+.cardlink {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  transition: none;
+}
+
+.cardlink.has-play-icon {
+  padding-bottom: 5rem;
+}
+
+.cardlink:hover,
+.cardlink:focus,
+.cardlink:active {
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+.cardlink img {
+  position: absolute;
+  display: block;
+  margin: 0;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.cardlink > h2,
+.cardlink > p {
+  position: relative;
+  z-index: 1;
+  margin: 0.25rem 0;
+}
+
+.cardlink img[src*="sign-icon-"] {
+  position: static;
+  width: 200px;
+  height: 200px;
+  max-width: 200px;
+  margin: 0 auto 0.25rem;
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+  filter: none;
+  transition: transform 0.18s ease;
+}
+
+.cardlink .play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  z-index: 0;
+  width: 150px;
+  height: 150px;
+  max-width: none;
+  object-fit: contain;
+  opacity: 1;
+  visibility: visible;
+  filter: brightness(0) invert(1);
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.cardlink:hover .play-icon,
+.cardlink:focus-visible .play-icon,
+.card:hover .cardlink .play-icon,
+.card:focus-within .cardlink .play-icon {
+  transform: translate(-50%, -50%) scale(1.1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+.cardlink.hovered .play-icon {
+  transform: translate(-50%, -50%) scale(1.1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+.cardlink:hover img[src*="sign-icon-"] {
+  transform: scale(1.08);
+}
+
+.sign-info-body {
+  overflow: auto;
+}
+
+.sign-info-body #main-content {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.sign-info-body main {
+  height: auto;
+  min-height: 0;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 1rem;
+  overflow: visible;
+}
+
+.sign-info-body .card {
+  height: auto;
+  min-height: 200px;
+}
+
+.sign-info-body .card img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+}
+
+.sign-info-body .card h2,
+.sign-info-body .card p {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.sign-info-body .card p {
+  line-height: 1.4;
+}
+
+.button,
+.bbutton {
+  border-radius: 3px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.button:focus-visible,
+.bbutton:focus-visible {
+  outline: 2px solid #ffb83b;
+  outline-offset: 2px;
+}
+
+#refresh {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 2;
+  display: flex;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#refresh svg {
+  position: static;
+  display: block;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+}
+
+.cards {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.quiz-body {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.quiz-body #main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.quiz-page {
+  display: grid;
+  flex: 1 1 auto;
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-areas:
+    "timer skip"
+    "question question"
+    "image image";
+  align-items: stretch;
+  gap: 0.75rem 1rem;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 1rem 1.5rem;
+  overflow: hidden;
+}
+
+.quiz-page #timer { grid-area: timer; margin: 0; align-self: center; }
+.quiz-page #zero { grid-area: skip; justify-self: end; min-height: 40px; padding: 0.5rem 1rem; }
+.quiz-page h2 {
+  position: static;
+  grid-area: question;
+  width: 100%;
+  margin: 0;
+  overflow: visible;
+  text-align: center;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}
+.quiz-page .question-area {
+  grid-area: image;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding-top: 12px;
+}
+.quiz-page .question-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.quiz-page #questionimage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  object-fit: fill;
+}
+.quiz-page #cover {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 21%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #1f1f1f;
+}
+.quiz-page #answers {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+.quiz-page #answers.two-answers {
+  grid-template-rows: minmax(0, 1fr);
+}
+.quiz-page #answers.two-answers .answer-row:nth-child(2) {
+  display: none;
+}
+.quiz-page #answers.one-answer .answer-row:first-child a:not([hidden]) {
+  grid-column: 1 / -1;
+}
+.quiz-page #answers.three-answers .answer-row:last-child a:not([hidden]) {
+  grid-column: 1 / -1;
+}
+.quiz-page .answer-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+  padding: 0.4rem;
+  min-width: 0;
+  min-height: 0;
+}
+.quiz-page #one,
+.quiz-page #two,
+.quiz-page #three,
+.quiz-page #four {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  padding: 0.35rem;
+  overflow-wrap: anywhere;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 5px;
+  text-shadow: 0 1px 2px #000, 0 -1px 2px #000;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.quiz-page #answers a[hidden] {
+  display: none;
+}
+
+.quiz-page #one:hover,
+.quiz-page #two:hover,
+.quiz-page #three:hover,
+.quiz-page #four:hover {
+  background-color: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.quiz-page #one:focus-visible,
+.quiz-page #two:focus-visible,
+.quiz-page #three:focus-visible,
+.quiz-page #four:focus-visible {
+  outline: 2px solid #ffb83b;
+  outline-offset: -3px;
+}
+
+#signin {
+  width: min(100%, 440px);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+#signin input,
+#signin select {
+  width: min(100%, 320px);
+  min-height: 2.75rem;
+  margin: 0.6rem 0 1rem;
+}
+
+@media (max-width: 760px) {
+  body {
+    flex-direction: column;
+  }
+
+  #sidebar {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid #ffb83b;
+  }
+
+  #top {
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  #icon {
+    flex: 0 0 auto;
+    width: 46px;
+    max-width: 46px;
+    padding: 0.35rem;
+  }
+
+  .button {
+    flex: 0 0 auto;
+    width: auto;
+    min-height: 46px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  #main-content {
+    width: 100%;
+    min-height: 0;
+  }
+
+  main {
+    min-height: calc(100vh - 54px);
+    min-height: calc(100dvh - 54px);
+  }
+
+  .row {
+    justify-content: center;
+  }
+
+  .cards {
+    height: auto;
+    gap: 1rem;
+  }
+
+  .quiz-body #main-content {
+    flex: 1 1 auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .quiz-page {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-areas:
+      "timer"
+      "question"
+      "image";
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .quiz-page #zero { position: absolute; top: 0.5rem; right: 0.75rem; }
+  .quiz-page #timer { padding-right: 5rem; }
+  .quiz-page #cover { height: 21%; }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 1rem;
+  }
+
+  .button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .card,
+  .cardlink,
+  .cardnonlink,
+  #disabledcontinue {
+    height: auto;
+    min-height: 200px;
+  }
+
+  .cardlink img[src*="sign-icon-"] {
+    width: 160px;
+    height: 160px;
+    max-width: 160px;
+  }
+
+  .cardlink .play-icon {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    width: 120px;
+    height: 120px;
+  }
+
+  .cardlink.has-play-icon {
+    height: 275px;
+    min-height: 275px;
+    padding-bottom: 4rem;
+  }
+
+  .cardlink:hover .play-icon,
+  .card:hover .cardlink .play-icon {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}

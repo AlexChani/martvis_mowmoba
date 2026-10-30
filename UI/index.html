@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: sans-serif;
@@ -78,17 +79,18 @@
       outline: none;
       border: rgba(255, 255, 255, 0.452) solid 1px;
       border-radius: 1px;
-      color: #ffb83b;
+      color: white;
       font-size: large;
       text-align: center;
     }
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div id="main-content">
     <main>
          <form onsubmit="return validateForm()" id="signin">
-            <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
+            <img id="icon" src="Images/brand-logo.png" alt="App logo">
             <label for="name">Name:</label>
             <input type="text" id="name" placeholder="Your name" maxlength="20" required><br><br>
             <label for="category">Category:</label>

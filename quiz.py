@@ -1,14 +1,15 @@
 import sqlite3
 import random
 import time
+from pathlib import Path
 import infoManager
 
-DEFAULT_IMAGE = "https://i.imgur.com/CIFcXSG.png"
+DEFAULT_IMAGE = (Path(__file__).resolve().parent / "UI" / "Images" / "default-question.png").as_uri()
 
 class ConsoleQuiz:
     def __init__(self):
         self.category = infoManager.getCategory()
-        self.db_path = f"DBs/questions_{self.category}.db"
+        self.db_path = infoManager.get_questions_db_path(self.category)
         self.ended = False
         self.questions = []
         self.index = 0
@@ -45,7 +46,7 @@ class ConsoleQuiz:
     def get_current_image(self):
         if self.index < len(self.questions):
             image = self.questions[self.index][3]
-            return image if image else "https://i.imgur.com/CIFcXSG.png"
+            return image if image else DEFAULT_IMAGE
         return ""
 
     def get_timer_text(self):
@@ -83,7 +84,7 @@ class ConsoleQuiz:
         return False
 
     def save_wrong(self, qid, theme_id):
-        db = sqlite3.connect("DBs/info.db")
+        db = sqlite3.connect(infoManager.get_db_path())
         c = db.cursor()
         c.execute("CREATE TABLE IF NOT EXISTS wrong_questions (qid TEXT PRIMARY KEY)")
         c.execute("INSERT OR IGNORE INTO wrong_questions (qid) VALUES (?)", (qid,))
@@ -116,7 +117,7 @@ class ConsoleQuiz:
             return
         self.ended = True
 
-        db = sqlite3.connect("DBs/info.db")
+        db = sqlite3.connect(infoManager.get_db_path())
         c = db.cursor()
         c.execute("""
             CREATE TABLE IF NOT EXISTS stats (
@@ -145,7 +146,7 @@ class ConsoleQuiz:
 class ConsoleSequentialQuiz:
     def __init__(self):
         self.category = infoManager.getCategory()
-        self.db_path = f"DBs/questions_{self.category}.db"
+        self.db_path = infoManager.get_questions_db_path(self.category)
         self.questions = []
         self.index = 0
         self.score = 0
@@ -212,7 +213,7 @@ class ConsoleSequentialQuiz:
         return False
 
     def save_wrong(self, qid, theme_id):
-        db = sqlite3.connect("DBs/info.db")
+        db = sqlite3.connect(infoManager.get_db_path())
         c = db.cursor()
         c.execute("CREATE TABLE IF NOT EXISTS wrong_questions (qid TEXT PRIMARY KEY)")
         c.execute("INSERT OR IGNORE INTO wrong_questions (qid) VALUES (?)", (qid,))
@@ -241,7 +242,7 @@ class ConsoleSequentialQuiz:
 
 
 
-# test
+# run the sequential quiz from the terminal
 if __name__ == "__main__":
     quiz = ConsoleSequentialQuiz()
     while not quiz.is_finished():
@@ -264,7 +265,7 @@ if __name__ == "__main__":
 
 
 
-#test
+# run the timed quiz from the terminal
 if __name__ == "__main__":
     quiz = ConsoleQuiz()
     while not quiz.is_finished():

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: sans-serif;
@@ -122,11 +123,7 @@
       min-width: 200px;
       min-height: 200px;
       background-color: rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      box-shadow: 2px 2px 30px black;
+      transition: box-shadow 0.18s ease;
     }
 
     #disabledcontinue {
@@ -161,6 +158,7 @@
     }
 
     .cardlink {
+      position: relative;
       overflow: clip;
       padding: 0;
       width: 350px;
@@ -168,29 +166,11 @@
       min-width: 200px;
       min-height: 200px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       background-color: transparent;
-      transition: all 0.3s ease;
+      transition: none;
       flex-direction: column;
-    }
-
-    .cardlink:hover{
-      background-color: #ffffff3a;
-    }
-
-    .cardlink img {
-      position: fixed;
-      opacity: 0;
-      width: 200px;
-      height: 200px;
-      transition: all 0.3s ease;
-    }
-
-    .cardlink img:hover {
-      opacity: 1;
-      width: 350px;
-      height: 350px;
     }
 
     .card p, .card h2 {
@@ -264,15 +244,16 @@
       font-size: 12px;
     }
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
-      <a href="file:///home.html" class="button">Home</a>
-      <a href="file:///practice.html" class="button" id="selected">Practice</a>
-      <a href="file:///stats.html" class="button">Stats</a>
-      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+      <img id="icon" src="Images/brand-logo.png" alt="App logo">
+      <a href="home.html" class="button">Home</a>
+      <a href="practice.html" class="button" id="selected">Practice</a>
+      <a href="stats.html" class="button">Stats</a>
+      <a href="schoolsmap.html" class="button">Driving Schools</a>
     </div>
   </div>
 
@@ -287,7 +268,7 @@
     <main>
       <div class="row">
         <div class="card">
-          <a class="cardlink" href="file:///quiz_random.html">
+          <a class="cardlink has-play-icon" href="quiz_random.html">
             <h2>
               Quiz Mode
             </h2>
@@ -297,32 +278,38 @@
             <p>
               Theory test imitation
             </p>
-            <img src="https://i.imgur.com/wNf9V5Z.png" alt="start">
+            <img class="play-icon" src="Images/play-icon.png" alt="start">
           </a>
         </div>
 
         <div class="card">
-          <a class="cardlink" href="file:///quiz_sequential.html">
+          <a class="cardlink has-play-icon" href="quiz_sequential.html">
             <h2>Training Mode</h2>
             <p>Test with every question in the category</p>
-            <img src="https://i.imgur.com/wNf9V5Z.png" alt="start">
+            <img class="play-icon" src="Images/play-icon.png" alt="start">
           </a>
         </div>
       </div>
       <div class="row">
         <div class="card">
-          <a class="cardlink" href="file:///info.html">
+          <a class="cardlink has-play-icon" href="info.html">
             <h2>
               Info
             </h2>
             <p>
               Get basic info about driving theory
             </p>
-            <img src="https://i.imgur.com/wNf9V5Z.png" alt="start">
+            <img class="play-icon" src="Images/play-icon.png" alt="start">
           </a>
         </div>
       </div>
     </main>
   </div>
+  <script>
+    document.querySelectorAll('.cardlink.has-play-icon').forEach(link => {
+      link.addEventListener('pointerenter', () => link.classList.add('hovered'));
+      link.addEventListener('pointerleave', () => link.classList.remove('hovered'));
+    });
+  </script>
 </body>
 </html>

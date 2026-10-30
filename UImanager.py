@@ -1,14 +1,23 @@
 import os
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEnginePage
-from PyQt5.QtCore import QUrl, QTimer
-from PyQt5.QtGui import QIcon
+
+# use the project folder for app files
+# this still works if the app starts somewhere else like program files
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+os.chdir(BASE_DIR)
+
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QFrame, QVBoxLayout,
+    QStackedLayout, QLabel, QProgressBar, QMessageBox
+)
+from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEnginePage, QWebEngineProfile
+from PyQt5.QtCore import QUrl, QTimer, Qt, QStandardPaths, QThread, QObject, pyqtSignal, pyqtSlot
+from PyQt5.QtGui import QDesktopServices, QIcon
+from PyQt5.QtWebEngineWidgets import QWebEngineSettings
 import infoManager
 from quiz import ConsoleQuiz, ConsoleSequentialQuiz
 
-# paths
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# app paths
 PAGES_DIR = os.path.join(BASE_DIR, "UI")
 ICON_PATH = os.path.join(PAGES_DIR, "Images", "icon.ico")
 
@@ -22,26 +31,123 @@ class CustomWebEnginePage(QWebEnginePage):
             if self.callback:
                 self.callback(url)
             return False
+        if url.scheme() == "file" and isMainFrame:
+            if self.callback:
+                self.callback(url)
+            return False
+        if url.scheme().lower() in ("http", "https") and isMainFrame:
+            QDesktopServices.openUrl(url)
+            return False
         return super().acceptNavigationRequest(url, _type, isMainFrame)
+
+
+class ScrapeWorker(QObject):
+    progress = pyqtSignal(str, int, object)
+    failed = pyqtSignal(str)
+    finished = pyqtSignal()
+
+    def __init__(self, category):
+        super().__init__()
+        self.category = category
+
+    @pyqtSlot()
+    def run(self):
+        try:
+            import scraper
+            scraper.scrape_category(self.category, self.progress.emit)
+        except Exception as error:
+            self.failed.emit(str(error))
+        finally:
+            self.finished.emit()
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Drivers License App")
         self.setWindowIcon(QIcon(ICON_PATH))
-        self.setMinimumSize(1500, 1050)
+        screen_size = QApplication.primaryScreen().availableGeometry()
+        self.setMinimumSize(min(850, screen_size.width()), min(560, screen_size.height()))
+        self.resize(min(1180, screen_size.width() - 48), min(780, screen_size.height() - 48))
 
         self.quiz = None
         self.quiz_timer = QTimer()
         self.quiz_timer.timeout.connect(self.update_quiz_ui)
+        self.scrape_thread = None
+        self.scrape_worker = None
+        self.scrape_active = False
+        self.scrape_error = None
 
-        self.view = QWebEngineView()
-        self.view.setPage(CustomWebEnginePage(self.view, self.handle_pycall))
-        self.setCentralWidget(self.view)
+        cache_root = QStandardPaths.writableLocation(QStandardPaths.CacheLocation)
+        if not cache_root:
+            cache_root = os.path.join(BASE_DIR, "cache")
+        webengine_path = os.path.join(cache_root, "MartvisMowmoba", "QtWebEngine")
+        cache_path = os.path.join(webengine_path, "Cache")
+        storage_path = os.path.join(webengine_path, "Storage")
+        os.makedirs(cache_path, exist_ok=True)
+        os.makedirs(storage_path, exist_ok=True)
+        self.web_profile = QWebEngineProfile.defaultProfile()
+        self.web_profile.setCachePath(cache_path)
+        self.web_profile.setPersistentStoragePath(storage_path)
+
+        self.container = QWidget(self)
+        self.page_stack = QStackedLayout(self.container)
+        self.page_stack.setStackingMode(QStackedLayout.StackAll)
+        self.page_stack.setContentsMargins(0, 0, 0, 0)
+
+        self.view = QWebEngineView(self.container)
+        page = CustomWebEnginePage(self.view, self.handle_url)
+        # allow local pages to load the map tiles and library
+        page.settings().setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, True)
+        # identify map tile requests from this app
+        page.profile().setHttpUserAgent("MartvisMowmoba/1.0")
+        self.view.setPage(page)
+
+        self.progress_overlay = QWidget(self.container)
+        self.progress_overlay.setObjectName("refreshOverlay")
+        self.progress_overlay.setAttribute(Qt.WA_StyledBackground, True)
+        self.progress_overlay.setStyleSheet("""
+            #refreshOverlay { background-color: rgba(0, 0, 0, 185); }
+            #refreshPanel { background-color: #2b2b2b; border: 1px solid #ffb83b; border-radius: 8px; }
+            #refreshTitle { color: #fff; font-size: 18px; font-weight: 600; }
+            #refreshDetails { color: rgba(255, 255, 255, 0.78); }
+            QProgressBar { height: 16px; border: 1px solid #666; border-radius: 4px; background: #1f1f1f; }
+            QProgressBar::chunk { background: #ffb83b; border-radius: 3px; }
+        """)
+        overlay_layout = QVBoxLayout(self.progress_overlay)
+        overlay_layout.setContentsMargins(24, 24, 24, 24)
+        overlay_layout.addStretch()
+
+        self.progress_panel = QFrame(self.progress_overlay)
+        self.progress_panel.setObjectName("refreshPanel")
+        self.progress_panel.setMinimumWidth(320)
+        self.progress_panel.setMaximumWidth(420)
+        panel_layout = QVBoxLayout(self.progress_panel)
+        panel_layout.setContentsMargins(24, 20, 24, 20)
+        panel_layout.setSpacing(12)
+
+        self.progress_title = QLabel("Refreshing questions", self.progress_panel)
+        self.progress_title.setObjectName("refreshTitle")
+        self.progress_details = QLabel("Starting refresh...", self.progress_panel)
+        self.progress_details.setObjectName("refreshDetails")
+        self.progress_details.setWordWrap(True)
+        self.progress_bar = QProgressBar(self.progress_panel)
+        self.progress_bar.setRange(0, 0)
+        self.progress_bar.setTextVisible(False)
+
+        panel_layout.addWidget(self.progress_title)
+        panel_layout.addWidget(self.progress_details)
+        panel_layout.addWidget(self.progress_bar)
+        overlay_layout.addWidget(self.progress_panel, 0, Qt.AlignCenter)
+        overlay_layout.addStretch()
+
+        self.page_stack.addWidget(self.view)
+        self.page_stack.addWidget(self.progress_overlay)
+        self.progress_overlay.hide()
+        self.setCentralWidget(self.container)
 
         self.progresstext = ""
 
-        self.view.urlChanged.connect(self.handle_url)
         if(infoManager.info_exists()):
             self.load_page("home.html")
         else:
@@ -49,11 +155,85 @@ class MainWindow(QMainWindow):
 
         self.test_in_progress = True
 
+    def show_refresh_overlay(self):
+        self.page_stack.setCurrentWidget(self.progress_overlay)
+        self.progress_overlay.show()
+        self.progress_overlay.raise_()
+
+    def hide_refresh_overlay(self):
+        self.progress_overlay.hide()
+        self.page_stack.setCurrentWidget(self.view)
+
+    def start_scrape(self):
+        if self.scrape_active:
+            return
+
+        self.scrape_active = True
+        self.scrape_error = None
+        self.progress_title.setText("Refreshing questions")
+        self.progress_details.setText("Connecting to the question source...")
+        self.show_refresh_overlay()
+        QApplication.processEvents()
+
+        self.scrape_thread = QThread(self)
+        self.scrape_worker = ScrapeWorker(infoManager.getCategory())
+        self.scrape_worker.moveToThread(self.scrape_thread)
+        self.scrape_thread.started.connect(self.scrape_worker.run)
+        self.scrape_worker.progress.connect(self.show_progress)
+        self.scrape_worker.failed.connect(self.scrape_failed)
+        self.scrape_worker.finished.connect(self.scrape_thread.quit)
+        self.scrape_worker.finished.connect(self.scrape_worker.deleteLater)
+        self.scrape_thread.finished.connect(self.scrape_finished)
+        self.scrape_thread.finished.connect(self.scrape_thread.deleteLater)
+        self.scrape_thread.start()
+
     def show_progress(self, cat, pg, _):
-        self.progresstext = f"{cat} → gverdi {pg}"
-        self.load_page("practice.html")
+        self.progresstext = f"{cat} → page {pg}"
+        self.progress_details.setText(self.progresstext)
+
+    def scrape_failed(self, message):
+        self.scrape_error = message
+        self.progress_details.setText("The refresh could not finish")
+
+    def scrape_finished(self):
+        self.scrape_active = False
+        self.hide_refresh_overlay()
+        self.scrape_worker = None
+        self.scrape_thread = None
+
+        if self.scrape_error:
+            QMessageBox.warning(self, "Refresh failed", self.scrape_error)
+
+    def closeEvent(self, event):
+        if self.scrape_active:
+            QMessageBox.information(
+                self,
+                "Refresh in progress",
+                "Wait for the question refresh to finish before closing the app."
+            )
+            event.ignore()
+            return
+
+        if self.quiz is not None:
+            answer = QMessageBox.question(
+                self,
+                "Quiz in progress",
+                "A quiz is in progress. Close the app and discard this quiz?",
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No
+            )
+            if answer != QMessageBox.Yes:
+                event.ignore()
+                return
+
+        self.quiz_timer.stop()
+        event.accept()
+
 
     def load_page(self, page_name):
+        if self.scrape_active:
+            return
+
         page_path = os.path.join(PAGES_DIR, page_name)
         if not os.path.exists(page_path):
             print(f"! Page not found: {page_name}")
@@ -71,15 +251,9 @@ class MainWindow(QMainWindow):
                 print("Error stopping timers:", e)
             self.quiz = None
 
-        # html = html.replace("{{username}}", get_username())
-
-        #if page_name == "practice.html":
-           # html = html.replace("{{enabled_style}}", "flex" if self.test_in_progress else "none")
-           # html = html.replace("{{disabled_style}}", "none" if self.test_in_progress else "flex")
-           # html = html.replace("{{in_progress}}", "Yes" if self.test_in_progress else "No")
-           # html = html.replace("{{progress}}", self.progresstext)
         if page_name == "schoolsmap.html":
             import json
+
             schools = [
                 {"name": "Emsi Driving School", "lat": 41.722626582787434, "lon": 44.73030587850845,
                  "phone": "032 205 08 00", "address": "6 Marijani St, Tbilisi", "website": "https://emsi.ge/"},
@@ -108,13 +282,16 @@ class MainWindow(QMainWindow):
                 {"name": "AutoSchool Drift", "lat":41.69160373251388, "lon":44.869872215334105,
                 "phone": "551 11 80 33", "address": "2 Javakheti Business Center Phoenix 5th Floor Room 11/12 Tbilisi, 0182", "website": ""},
                 {"name": "Nino's auto school", "lat": 42.260200208731355, "lon": 42.69245154111726,
-                 "phone": "555 03 88 55","address": "Ninoshvili 25, Kutaisi 4600", "website": "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi5zp7GgaGOAxXYVvEDHSxzPIIQFnoECDkQAQ&url=https%3A%2F%2Fwww.facebook.com%2FDrivingSchoolwithNINO%2F&usg=AOvVaw2RCJKjA2t2X7pUwtEvGPby&opi=89978449"},
+                 "phone": "555 03 88 55","address": "Ninoshvili 25, Kutaisi 4600", "website": "https://www.facebook.com/DrivingSchoolwithNINO/"},
                 {"name": "Driving School", "lat": 41.64458842702955, "lon": 41.62828309134257,
                  "phone": "593 90 16 14", "address": "9 Selim Khimshiashvili St, Batumi 6010", "website": "http://www.facebook.com/avtoskola.batumi"},
                 {"name": "Driving School 'asvs' - Autodrom", "lat": 41.62798861703887, "lon": 41.63988240859401,
                  "phone": "591 25 10 10", "address": "130 M.Varshanidze, Batumi, Kutaisi 4600", "website": ""},
             ]
-            html = html.replace("{{school_data}}", json.dumps(schools))
+            if "const schools = [];" in html:
+                html = html.replace("const schools = [];", f"const schools = {json.dumps(schools)};", 1)
+            else:
+                print("! School list was not added to the map page")
         elif page_name == "home.html":
             name = infoManager.getName()
             html = html.replace("{{username}}", name)
@@ -150,18 +327,19 @@ class MainWindow(QMainWindow):
         self.view.setHtml(html, QUrl.fromLocalFile(page_path))
 
     def handle_url(self, url):
+        if self.scrape_active:
+            return
+
         scheme = url.scheme()
         path = url.path().lstrip("/")
         if scheme == "pycall":
             self.handle_pycall(url)
-            self.view.back()
         elif scheme == "file":
             filename = os.path.basename(path)
             self.load_page(filename)
 
     def handle_pycall(self, url):
-        from urllib.parse import urlparse, parse_qs
-        print("CALLED PYTHON:", url.toString())
+        from urllib.parse import parse_qs
         action = url.path().lstrip("/")
         query = parse_qs(url.query())
 
@@ -175,20 +353,16 @@ class MainWindow(QMainWindow):
                 print("Quiz not initialized yet")
                 return
 
-            print(action)
             ans_str = action.split("_")[1]
             if ans_str.isdigit():
-                print(ans_str)
                 answer_num = int(ans_str)
                 if answer_num == 0:
                     self.quiz.skip_current_question()
                 else:
-                    valid, msg = self.quiz.answer_current_question(answer_num)
-                    print(msg)
+                    self.quiz.answer_current_question(answer_num)
                 self.update_quiz_ui()
         elif action.startswith("update"):
-            import scraper
-            scraper.scrape_category(infoManager.getCategory(), self.show_progress)
+            self.start_scrape()
 
     def render_quiz_html(self, html):
         question = self.quiz.get_current_question_text()
@@ -260,6 +434,7 @@ class MainWindow(QMainWindow):
             document.getElementById('two').innerText = {repr(answers.get(2, ""))};
             document.getElementById('three').innerText = {repr(answers.get(3, ""))};
             document.getElementById('four').innerText = {repr(answers.get(4, ""))};
+            if (window.updateAnswerButtons) window.updateAnswerButtons();
             document.getElementById('questionimage').src = {repr(image)};
             document.getElementById('timer').innerText = {repr(timer_text)};
         """
@@ -290,7 +465,12 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == "__main__":
+    # let qt scale the app on high resolution screens
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication(sys.argv)
+    app.setOrganizationName("Martvis")
+    app.setApplicationName("MartvisMowmoba")
     MainWindowInstance = MainWindow()
     app.setWindowIcon(QIcon(ICON_PATH))
     MainWindowInstance.show()

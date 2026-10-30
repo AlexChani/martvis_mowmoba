@@ -2,12 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 import sqlite3
 import time
-import os
+import infoManager
 
-# mtavari URL kategoriebistvis ({} sheicvleba kategoriis ID-t da temis ID-t)
+# main url for each category and theme id
 BASE_URL = "https://teoria.on.ge/tickets/{}/{}"
 
-# kategoriebis ID-ebi URL-istvis (mxolod unikaluri kategoriit)
+# category ids used by the source website
 CATEGORY_IDS = {
     "A": 1,
     "B": 2,
@@ -19,7 +19,7 @@ CATEGORY_IDS = {
     "AM": 10
 }
 
-# temebi ID-it da saxelit
+# theme names by id
 THEMES = {
     1: "მძღოლი, მგზავრი და ქვეითი, ნიშნები, კონვეცია",
     2: "უწესივრობა და მართვის პირობები",
@@ -58,14 +58,14 @@ THEMES = {
 
 def scrape_category(cat_name, progress_fn=None):
     """
-    yvela kitxvas ascrapebs archeuli kategoriidan teoria.on.ge saitidan da imaxsovrebs SQLite bazashi.
+    scrape a category from teoria.on.ge and save it to sqlite
 
-    Args:
-        cat_name (str): kategoriis saxeli (magalitad "B", "AM").
-        progress_fn (func): progressis sanaxavi funqcia UI-stvis.
+    args:
+        cat_name: category name like "b" or "am"
+        progress_fn: callback for showing progress in the ui
     """
 
-    # timeris dawyeba
+    # track how long the category takes to download
     start_time = time.time()
 
     cat_id = CATEGORY_IDS.get(cat_name)
@@ -73,15 +73,14 @@ def scrape_category(cat_name, progress_fn=None):
         print(f"X category not found: {cat_name}")
         return
 
-    # databasistvis saxeli kategoriis mixedvit
-    os.makedirs("DBS", exist_ok=True)
-    db_path = f"DBS/questions_{cat_name}.db"
+    # keep a separate question database for each category
+    db_path = infoManager.get_questions_db_path(cat_name)
 
-    # ukavshirdeba an qmnis databases
+    # open the database or create it if needed
     con = sqlite3.connect(db_path)
     cur = con.cursor()
 
-    # qmnis tables tu ar arsebobs
+    # create the tables on the first run
     cur.execute("""
         CREATE TABLE IF NOT EXISTS questions (
             cat TEXT,
@@ -108,11 +107,11 @@ def scrape_category(cat_name, progress_fn=None):
         )
     """)
 
-    # sheyavs yvela tema themes table-shi (1-32)
+    # add the theme names before saving questions
     for tid, tname in THEMES.items():
         cur.execute("INSERT OR IGNORE INTO themes (id, name) VALUES (?, ?)", (tid, tname))
 
-    # yvela temas ascrapebs (1-დან 32-მდე)
+    # download all 32 themes one page at a time
     for theme_id in range(1, 33):
         page = 1
         while True:
@@ -121,36 +120,37 @@ def scrape_category(cat_name, progress_fn=None):
 
             print(f"[{cat_name}] scraping theme {theme_id} -> page {page}...")
 
-            res = requests.get(f"{BASE_URL.format(cat_id, theme_id)}?page={page}")
+            res = requests.get(f"{BASE_URL.format(cat_id, theme_id)}?page={page}", timeout=20)
+            res.raise_for_status()
             soup = BeautifulSoup(res.text, "html.parser")
             items = soup.select(".item")
 
-            # tu ver moidzebna kitxvebi cherdeba funqcia
+            # no items means this theme is finished
             if not items:
                 print(f"X no questions found on theme {theme_id} page {page}. stopping.")
                 break
 
             for item in items:
                 try:
-                    # kitxvis ID
+                    # read the question id
                     qid_tag = item.select_one(".t-num")
                     qid = int(qid_tag.text.strip().lstrip("#")) if qid_tag else None
                     if not qid:
                         continue
 
-                    # suratis URL, tu arsebobs
+                    # save the image url if there is one
                     img = item.select_one(".t-image img")
                     img_url = img["src"].strip() if img else None
 
-                    # kitxvis teqsti
+                    # read the question text
                     qtxt_el = item.select_one(".t-question .text-wrap")
                     qtext = qtxt_el.text.strip() if qtxt_el else "?"
 
-                    # ganmarteba, tu arsebobs
+                    # save the explanation if there is one
                     desc_el = item.select_one(".desc-box-inner p")
                     desc = desc_el.text.strip() if desc_el else ""
 
-                    # pasuxebi da swori pasuxis agnishva
+                    # collect the answers and mark the correct one
                     correct = None
                     answers = []
                     for ans in item.select("p.t-answer"):
@@ -166,11 +166,11 @@ def scrape_category(cat_name, progress_fn=None):
                             correct = opt_num
                         answers.append((opt_num, ans_text))
 
-                    # kitxvis chawera
+                    # add the question without replacing existing data
                     cur.execute("INSERT OR IGNORE INTO questions VALUES (?, ?, ?, ?, ?, ?, ?)",
                                 (cat_name, qid, theme_id, qtext, correct, img_url, desc))
 
-                    # pasuxebis chawera
+                    # add the available answers
                     for num, text in answers:
                         cur.execute("INSERT OR IGNORE INTO answers VALUES (?, ?, ?)", (qid, num, text))
 
@@ -186,6 +186,3 @@ def scrape_category(cat_name, progress_fn=None):
     if progress_fn:
         progress_fn(f"{cat_name}/T{theme_id}", page, None)
     print(f"finished category: {cat_name} in {elapsed:.2f} seconds")
-
-#if __name__ == "__main__":
-#    scrape_category("AM", progress_fn=show_progress)

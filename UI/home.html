@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: sans-serif;
@@ -139,21 +140,27 @@
     }
 
     .cards {
-      height: 60%;
+      height: auto;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: flex-start;
+      gap: 0;
+    }
+
+    .cards > .section + .section {
+      margin-top: 1.5rem;
     }
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
-      <a href="file:///home.html" class="button" id="selected">Home</a>
-      <a href="file:///practice.html" class="button">Practice</a>
-      <a href="file:///stats.html" class="button">Stats</a>
-      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+      <img id="icon" src="Images/brand-logo.png" alt="App logo">
+      <a href="home.html" class="button" id="selected">Home</a>
+      <a href="practice.html" class="button">Practice</a>
+      <a href="stats.html" class="button">Stats</a>
+      <a href="schoolsmap.html" class="button">Driving Schools</a>
     </div>
   </div>
 
@@ -169,15 +176,14 @@
           <h2>Your Progress</h2>
           <p>➕ Passed tests: {{success_tests}}<br>
           <br>✔️ Tests Taken: {{tests_taken}}<br>
-          <!-- <br>📊 Avg. Score: {{avg_score}}<br> -->
           <br>📅 Last Session: {{last_session}}</p>
         </div>
 
         <div class="section">
           <h2>Quick Menu</h2>
           <ul>
-            <li><a href="file:///quiz_random.html" class="button">Quick start</a></li>
-            <li><a href="file:///mistake_questions.html" class="button">View Mistakes</a></li>
+            <li><a href="quiz_random.html" class="button">Quick start</a></li>
+            <li><a href="mistake_questions.html" class="button">View Mistakes</a></li>
           </ul>
         </div>
       </div>

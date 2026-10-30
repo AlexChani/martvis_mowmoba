@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       display: flex;
@@ -159,7 +160,7 @@
     }
 
     .signal #double {
-      width: 40%;
+      width: 100%;
     }
 
     .signal img {
@@ -186,22 +187,84 @@
       color: white;
       background-color: rgba(255, 255, 255, 0.137);
     }
+
+    #main-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #main-content > main {
+      min-height: 0;
+      height: auto;
+      gap: 1rem;
+      padding: 0 1.5rem 1.5rem;
+      overflow: visible;
+    }
+
+    .page-title {
+      margin: 0;
+      padding: 0.25rem 0 0.5rem;
+      font-size: 1.65rem;
+      text-align: left;
+      color: #fff;
+    }
+
+    .signal {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+      align-items: center;
+      gap: 1.5rem;
+      height: auto;
+      max-height: none;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.055);
+    }
+
+    .signal > div { min-width: 0; }
+    .signal h3 { margin: 0.25rem 0; color: #ffb83b; }
+    .signal h2 { margin: 0.35rem 0 0.65rem; text-align: left; font-size: 1.25rem; }
+    .signal p { margin: 0.25rem 0; line-height: 1.45; }
+    .signal .indent { margin-left: 1rem; }
+    .signal img {
+      width: 100%;
+      max-width: 260px;
+      height: 200px;
+      justify-self: end;
+      object-fit: contain;
+      padding: 0;
+      background: transparent;
+      border-radius: 6px;
+      filter: invert(1) grayscale(1);
+      mix-blend-mode: screen;
+    }
+
+    .page-title + .signal { margin-top: 0; }
+
+    @media (max-width: 760px) {
+      #main-content > main { padding: 0 1rem 1rem; }
+      .signal { grid-template-columns: 1fr; gap: 0.75rem; padding: 1rem; }
+      .signal img { justify-self: center; max-width: 240px; height: 180px; }
+    }
   </style>
+  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div id="sidebar">
     <div id="top">
-      <img id="icon" src="https://i.imgur.com/uIkW4X5.png" alt="icon">
-      <a href="file:///home.html" class="button">Home</a>
-      <a href="file:///practice.html" class="button">Practice</a>
-      <a href="file:///stats.html" class="button">Stats</a>
-      <a href="file:///schoolsmap.html" class="button">Driving Schools</a>
+      <img id="icon" src="Images/brand-logo.png" alt="App logo">
+      <a href="home.html" class="button">Home</a>
+      <a href="practice.html" class="button">Practice</a>
+      <a href="stats.html" class="button">Stats</a>
+      <a href="schoolsmap.html" class="button">Driving Schools</a>
     </div>
   </div>
 
   <div id="main-content">
-    <a href="file:///info.html" class="bbutton">Back</a>
+    <a href="info.html" class="bbutton">Back</a>
     <main>
+        <h1 class="page-title">Regulator Signals</h1>
         <div class="signal">
             <div>
                 <h3>Signal 1:</h3>
