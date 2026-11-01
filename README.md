@@ -81,7 +81,6 @@ question refresh also needs internet because it reads questions from `teoria.on.
 
 - if `setup_dev.bat` says python is missing, install python and try again
 - if the map is blank, check the internet connection
-- if an exe under `build` says `python313.dll` is missing, close it and use the exe under `dist` instead
 - when sharing the exe, include the whole `dist\MartvisMowmoba` folder
 - the finished app is in `dist`. new temporary build files are kept in your local app data folder
 
